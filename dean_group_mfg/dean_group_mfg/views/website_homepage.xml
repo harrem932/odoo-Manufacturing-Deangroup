@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ══════════════════════════════════════════════════════════════
+     DEAN GROUP — ODOO WEBSITE HOMEPAGE
+     Route: / (replaces default Odoo homepage)
+     This renders inside Odoo's website layout with header/footer
+══════════════════════════════════════════════════════════════ -->
+
+<template id="homepage" name="Dean Group Homepage">
+    <t t-call="website.layout">
+        <t t-set="pageName" t-value="'homepage'"/>
+
+        <!-- ── CUSTOM CSS injected per page ── -->
+        <t t-set="head">
+            <link rel="stylesheet" href="/dean_group_mfg/static/src/css/website.css"/>
+        </t>
+
+        <!-- ═══════════════════════════════ HERO ═══ -->
+        <section class="dg-hero">
+            <div class="dg-hero-bg"></div>
+            <div class="dg-hero-grid"></div>
+            <div class="container">
+                <div class="dg-hero-inner">
+                    <div class="dg-hero-left">
+                        <div class="dg-eyebrow">
+                            <span class="dg-eyebrow-dot"></span>
+                            <span>Manchester Foundry · Est. 1972 · ISO 9001:2015</span>
+                        </div>
+                        <h1 class="dg-hero-h1">
+                            Precision<br/>
+                            <em>Metal Casting</em><br/>
+                            Specialists
+                        </h1>
+                        <p class="dg-hero-desc">
+                            Investment casting, die casting, MIM and forging for the world's
+                            most demanding industries. UK-manufactured in Manchester with
+                            quality-assured Asia supply. Over 50 years of critical component delivery.
+                        </p>
+                        <div class="dg-hero-actions">
+                            <a href="/get-quote" class="dg-btn dg-btn-fire">Request a Quote</a>
+                            <a href="/services" class="dg-btn dg-btn-ghost">Our Processes</a>
+                        </div>
+                        <div class="dg-trust-row">
+                            <span class="dg-trust-item">✓ ISO 9001:2015</span>
+                            <span class="dg-trust-item">✓ BSI Certified</span>
+                            <span class="dg-trust-item">✓ Cast Metals Federation</span>
+                        </div>
+                    </div>
+                    <div class="dg-hero-right">
+                        <div class="dg-stat-grid">
+                            <div class="dg-stat-card">
+                                <div class="dg-stat-num">50<span>+</span></div>
+                                <div class="dg-stat-label">Years in operation</div>
+                            </div>
+                            <div class="dg-stat-card">
+                                <div class="dg-stat-num">7<span>+</span></div>
+                                <div class="dg-stat-label">Industry sectors</div>
+                            </div>
+                            <div class="dg-stat-card">
+                                <div class="dg-stat-num">2</div>
+                                <div class="dg-stat-label">Global sites</div>
+                            </div>
+                            <div class="dg-stat-card">
+                                <div class="dg-stat-num">ISO</div>
+                                <div class="dg-stat-label">9001:2015 accredited</div>
+                            </div>
+                            <div class="dg-stat-card dg-stat-wide">
+                                <div class="dg-stat-label" style="margin-bottom:.5rem">Processes</div>
+                                <div class="dg-proc-bar">
+                                    <t t-foreach="processes" t-as="p">
+                                        <span class="dg-proc-tag"><t t-esc="p.name"/></span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ TICKER ═══ -->
+        <div class="dg-ticker">
+            <div class="dg-ticker-track">
+                <span>Investment Casting</span><span>Die Casting</span>
+                <span>Aluminium ELITE</span><span>Forging</span><span>MIM</span>
+                <span>3D Print Casting</span><span>Aerospace</span>
+                <span>Defence</span><span>Oil &amp; Gas</span><span>Medical</span>
+                <span>Rail</span><span>ISO 9001:2015</span><span>Manchester UK</span>
+                <!-- duplicate for seamless loop -->
+                <span>Investment Casting</span><span>Die Casting</span>
+                <span>Aluminium ELITE</span><span>Forging</span><span>MIM</span>
+                <span>3D Print Casting</span><span>Aerospace</span>
+                <span>Defence</span><span>Oil &amp; Gas</span><span>Medical</span>
+                <span>Rail</span><span>ISO 9001:2015</span><span>Manchester UK</span>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════ SERVICES ═══ -->
+        <section class="dg-section">
+            <div class="container">
+                <div class="dg-label">Manufacturing Processes</div>
+                <h2 class="dg-heading">Our Casting &amp; Forming Services</h2>
+                <p class="dg-sub">From concept and CAD through casting, finishing and delivery.</p>
+                <div class="dg-svc-grid">
+                    <t t-foreach="processes" t-as="p">
+                        <a t-att-href="p.website_url or '/services'" class="dg-svc-card">
+                            <div class="dg-svc-num">
+                                <t t-esc="'%02d' % (p_index + 1)"/> — <t t-esc="p.code.upper()"/>
+                            </div>
+                            <div class="dg-svc-title"><t t-esc="p.name"/></div>
+                            <p class="dg-svc-desc"><t t-esc="p.description or ''"/></p>
+                            <div class="dg-svc-meta">
+                                <span class="dg-tag dg-tag-fire">
+                                    <t t-if="p.supply_location == 'uk'">🇬🇧 UK Foundry</t>
+                                    <t t-elif="p.supply_location == 'china'">🌏 China Supply</t>
+                                    <t t-else="">🇬🇧+🌏 UK + China</t>
+                                </span>
+                                <t t-if="p.lead_time_uk">
+                                    <span class="dg-tag dg-tag-steel">
+                                        UK: <t t-esc="p.lead_time_uk"/>d
+                                    </span>
+                                </t>
+                            </div>
+                            <div class="dg-svc-arrow">Learn more →</div>
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ MARKETS ═══ -->
+        <div class="dg-markets-strip">
+            <div class="container">
+                <div class="dg-markets-row">
+                    <a href="/markets#aerospace" class="dg-market-item">
+                        <div class="dg-market-icon">✈️</div>
+                        <div class="dg-market-name">Aerospace</div>
+                    </a>
+                    <a href="/markets#defence" class="dg-market-item">
+                        <div class="dg-market-icon">🛡️</div>
+                        <div class="dg-market-name">Defence</div>
+                    </a>
+                    <a href="/markets#energy" class="dg-market-item">
+                        <div class="dg-market-icon">⚡</div>
+                        <div class="dg-market-name">Energy &amp; Power</div>
+                    </a>
+                    <a href="/markets#medical" class="dg-market-item">
+                        <div class="dg-market-icon">🏥</div>
+                        <div class="dg-market-name">Medical</div>
+                    </a>
+                    <a href="/markets#rail" class="dg-market-item">
+                        <div class="dg-market-icon">🚄</div>
+                        <div class="dg-market-name">Rail</div>
+                    </a>
+                    <a href="/markets#engineering" class="dg-market-item">
+                        <div class="dg-market-icon">⚙️</div>
+                        <div class="dg-market-name">Engineering</div>
+                    </a>
+                    <a href="/markets#architecture" class="dg-market-item">
+                        <div class="dg-market-icon">🏛️</div>
+                        <div class="dg-market-name">Architecture</div>
+                    </a>
+                    <a href="/markets" class="dg-market-item">
+                        <div class="dg-market-icon">🌍</div>
+                        <div class="dg-market-name">All Markets →</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════ WHY DG ═══ -->
+        <section class="dg-section dg-section-dark">
+            <div class="container">
+                <div class="dg-two-col">
+                    <div>
+                        <div class="dg-label">Why Choose Us</div>
+                        <h2 class="dg-heading">Casting expertise you can rely on</h2>
+                        <ul class="dg-why-list">
+                            <li>
+                                <span class="dg-why-icon">🏭</span>
+                                <div>
+                                    <strong>UK Foundry in Manchester</strong>
+                                    <span>Full UK manufacturing capability at Northbank Industrial Park, Irlam. Fast turnaround for UK clients.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dg-why-icon">🌏</span>
+                                <div>
+                                    <strong>Risk-Managed Asia Supply</strong>
+                                    <span>High-volume, low-cost China supply chain. All partners ISO 9001. Stringent UK quality inspection on arrival.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dg-why-icon">✅</span>
+                                <div>
+                                    <strong>End-to-End Quality Control</strong>
+                                    <span>Full visual, dimensional and chemical inspection at every stage. Certificate of Conformity on every delivery.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dg-why-icon">📐</span>
+                                <div>
+                                    <strong>3D Printing &amp; Rapid Prototyping</strong>
+                                    <span>In-house ThermoJet wax printing. CAD to physical prototype in days — test before you commit to tooling.</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="dg-why-icon">♻️</span>
+                                <div>
+                                    <strong>Sustainable Practices</strong>
+                                    <span>Wax and scrap metal recycled. Reducing your environmental footprint while maintaining quality.</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="/about" class="dg-btn dg-btn-ghost" style="margin-top:1.5rem;display:inline-flex">About Dean Group →</a>
+                    </div>
+                    <div class="dg-cert-grid">
+                        <div class="dg-cert-card">
+                            <div class="dg-cert-icon">🏅</div>
+                            <div class="dg-cert-name">ISO 9001:2015</div>
+                            <div class="dg-cert-detail">International quality management</div>
+                        </div>
+                        <div class="dg-cert-card">
+                            <div class="dg-cert-icon">🇬🇧</div>
+                            <div class="dg-cert-name">BSI Certified</div>
+                            <div class="dg-cert-detail">British Standards Institution</div>
+                        </div>
+                        <div class="dg-cert-card dg-cert-wide">
+                            <div class="dg-cert-icon">⚗️</div>
+                            <div>
+                                <div class="dg-cert-name">Cast Metals Federation</div>
+                                <div class="dg-cert-detail">Full member advocating for UK casting</div>
+                            </div>
+                        </div>
+                        <div class="dg-cert-card dg-cert-wide dg-cert-highlight">
+                            <div>
+                                <div class="dg-cert-name" style="color:#f26522">Materials We Work With</div>
+                                <div class="dg-tags-row">
+                                    <span class="dg-tag dg-tag-fire">Stainless Steel</span>
+                                    <span class="dg-tag dg-tag-fire">Carbon Steel</span>
+                                    <span class="dg-tag dg-tag-fire">Aluminium</span>
+                                    <span class="dg-tag dg-tag-steel">Titanium</span>
+                                    <span class="dg-tag dg-tag-steel">Brass &amp; Bronze</span>
+                                    <span class="dg-tag dg-tag-steel">Nickel / Cobalt</span>
+                                    <span class="dg-tag dg-tag-steel">Cast Iron</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ PROCESS STEPS ═══ -->
+        <section class="dg-section-sm dg-section-panel">
+            <div class="container">
+                <div class="dg-label">Our Process</div>
+                <h2 class="dg-heading">From Enquiry to Delivery</h2>
+                <div class="dg-steps">
+                    <div class="dg-step">
+                        <div class="dg-step-num">01</div>
+                        <div class="dg-step-title">Enquiry &amp; Design Review</div>
+                        <p class="dg-step-desc">Submit drawings or CAD. Our engineers review feasibility and recommend the optimal process and material.</p>
+                    </div>
+                    <div class="dg-step">
+                        <div class="dg-step-num">02</div>
+                        <div class="dg-step-title">Prototype &amp; Sampling</div>
+                        <p class="dg-step-desc">3D wax printing for rapid prototypes. First article approval before committing to production.</p>
+                    </div>
+                    <div class="dg-step">
+                        <div class="dg-step-num">03</div>
+                        <div class="dg-step-title">Production Casting</div>
+                        <p class="dg-step-desc">UK foundry or quality-assured Asia partner — chosen for your volume, budget and timeline.</p>
+                    </div>
+                    <div class="dg-step">
+                        <div class="dg-step-num">04</div>
+                        <div class="dg-step-title">Inspection &amp; Finishing</div>
+                        <p class="dg-step-desc">Full dimensional, visual and chemical inspection. Machining, heat treatment and surface treatments.</p>
+                    </div>
+                    <div class="dg-step">
+                        <div class="dg-step-num">05</div>
+                        <div class="dg-step-title">Delivery &amp; Certification</div>
+                        <p class="dg-step-desc">Certificate of Conformity issued. UK warehouse stocking for rapid call-off delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ CAREERS ═══ -->
+        <section class="dg-section dg-section-panel">
+            <div class="container">
+                <div class="dg-section-header">
+                    <div>
+                        <div class="dg-label">Join Our Team</div>
+                        <h2 class="dg-heading">Careers at Dean Group</h2>
+                        <p class="dg-sub">Manchester foundry with 50+ years of heritage. Heavy investment in training and apprenticeships.</p>
+                    </div>
+                    <a href="/careers" class="dg-btn dg-btn-ghost dg-btn-sm">All Vacancies →</a>
+                </div>
+                <div class="dg-jobs-grid">
+                    <a href="/jobs/apply?job=process-engineer" class="dg-job-card">
+                        <div class="dg-job-tags">
+                            <span class="dg-tag dg-tag-fire">Full Time</span>
+                            <span class="dg-tag dg-tag-steel">Manchester</span>
+                        </div>
+                        <div class="dg-job-title">Foundry Process Engineer</div>
+                        <p class="dg-job-desc">Develop and optimise casting processes across investment casting and die casting lines. Materials/Metallurgy degree preferred.</p>
+                        <span class="dg-job-apply">Apply Now →</span>
+                    </a>
+                    <a href="/jobs/apply?job=quality-inspector" class="dg-job-card">
+                        <div class="dg-job-tags">
+                            <span class="dg-tag dg-tag-fire">Full Time</span>
+                            <span class="dg-tag dg-tag-steel">Manchester</span>
+                        </div>
+                        <div class="dg-job-title">Quality Inspector – CMM</div>
+                        <p class="dg-job-desc">Visual, dimensional and chemical inspection of cast components. CMM experience preferred. ISO 9001 environment.</p>
+                        <span class="dg-job-apply">Apply Now →</span>
+                    </a>
+                    <a href="/jobs/apply?job=apprentice" class="dg-job-card">
+                        <div class="dg-job-tags">
+                            <span class="dg-tag dg-tag-fire">Apprenticeship</span>
+                            <span class="dg-tag dg-tag-steel">Manchester</span>
+                        </div>
+                        <div class="dg-job-title">Foundry Apprentice</div>
+                        <p class="dg-job-desc">Earn while you learn NVQ Level 2/3. Real hands-on experience from day one at our Manchester foundry.</p>
+                        <span class="dg-job-apply">Apply Now →</span>
+                    </a>
+                    <a href="/jobs/apply?job=sales-engineer" class="dg-job-card">
+                        <div class="dg-job-tags">
+                            <span class="dg-tag dg-tag-fire">Full Time</span>
+                            <span class="dg-tag dg-tag-steel">Remote / MCR</span>
+                        </div>
+                        <div class="dg-job-title">Technical Sales Engineer</div>
+                        <p class="dg-job-desc">Develop new business in aerospace, defence and oil &amp; gas. Technical metals background preferred.</p>
+                        <span class="dg-job-apply">Apply Now →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ CTA BANNER ═══ -->
+        <div class="dg-cta-banner">
+            <div class="container">
+                <div class="dg-cta-inner">
+                    <div>
+                        <h2>Ready to Start Your Project?</h2>
+                        <p>Talk to our casting specialists today. We'll recommend the right process for your component.</p>
+                    </div>
+                    <div class="dg-cta-actions">
+                        <a href="/get-quote" class="dg-btn dg-btn-white">Make an Enquiry</a>
+                        <a href="tel:01617751633" class="dg-btn dg-btn-outline-white">📞 0161 775 1633</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </t>
+</template>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONTACT THANKS PAGE
+══════════════════════════════════════════════════════════════ -->
+<template id="contact_thanks" name="Dean Group Contact Thanks">
+    <t t-call="website.layout">
+        <section class="dg-section" style="text-align:center;min-height:60vh;display:flex;align-items:center">
+            <div class="container">
+                <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+                <h1 class="dg-heading">Enquiry Received</h1>
+                <p class="dg-sub" style="margin:1rem auto;max-width:480px">
+                    Thank you for contacting Dean Group International.
+                    Our team will respond within one business day.
+                </p>
+                <a href="/" class="dg-btn dg-btn-fire">Return to Homepage</a>
+            </div>
+        </section>
+    </t>
+</template>
+
+<template id="quote_thanks" name="Dean Group Quote Thanks">
+    <t t-call="website.layout">
+        <section class="dg-section" style="text-align:center;min-height:60vh;display:flex;align-items:center">
+            <div class="container">
+                <div style="font-size:3rem;margin-bottom:1rem">📋</div>
+                <h1 class="dg-heading">Quote Request Submitted</h1>
+                <p class="dg-sub" style="margin:1rem auto;max-width:480px">
+                    We have received your casting enquiry.
+                    A sales engineer will be in touch within one business day.
+                </p>
+                <a href="/" class="dg-btn dg-btn-fire">Return to Homepage</a>
+            </div>
+        </section>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     SALE ORDER – Casting Tab
+══════════════════════════════════════════ -->
+<record id="view_sale_order_casting_form" model="ir.ui.view">
+    <field name="name">sale.order.casting.form</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <page name="order_lines" position="after">
+            <page name="casting_details" string="Casting Details">
+                <group>
+                    <group string="Customer Reference">
+                        <field name="customer_po_ref"/>
+                        <field name="casting_enquiry_id"/>
+                        <field name="industry"/>
+                        <field name="drawing_ref"/>
+                        <field name="alloy_spec"/>
+                    </group>
+                    <group string="Supply &amp; Quality">
+                        <field name="supply_site" widget="radio"/>
+                        <field name="cert_required"/>
+                        <field name="cert_language" invisible="not cert_required"/>
+                        <field name="ppap_required"/>
+                        <field name="ppap_level" invisible="not ppap_required"/>
+                        <field name="nda_in_place"/>
+                    </group>
+                </group>
+                <field name="inspection_note"
+                       placeholder="Special inspection or quality requirements for this order..."/>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Sale order line – casting columns -->
+<record id="view_sale_order_line_casting" model="ir.ui.view">
+    <field name="name">sale.order.line.casting.form</field>
+    <field name="model">sale.order.line</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <field name="product_id" position="after">
+            <field name="casting_process_id" optional="hide"/>
+            <field name="alloy_spec" optional="hide"/>
+            <field name="unit_weight_g" optional="hide"/>
+            <field name="total_weight_kg" optional="hide" readonly="1"/>
+        </field>
+    </field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     PURCHASE ORDER – Casting Tab
+══════════════════════════════════════════ -->
+<record id="view_purchase_order_casting_form" model="ir.ui.view">
+    <field name="name">purchase.order.casting.form</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+        <page name="purchase_delivery_invoice" position="after">
+            <page name="casting_po" string="Casting &amp; Supply">
+                <group>
+                    <group string="Supplier Qualification">
+                        <field name="supplier_approved" widget="boolean_toggle"/>
+                        <field name="supplier_iso_cert" widget="boolean_toggle"/>
+                        <field name="casting_process_id"/>
+                        <field name="china_supply_id"/>
+                    </group>
+                    <group string="Quality Gate">
+                        <field name="quality_gate" widget="boolean_toggle"/>
+                        <field name="cert_required" widget="boolean_toggle"/>
+                        <field name="cert_received" widget="boolean_toggle"/>
+                        <field name="quarantine_required" widget="boolean_toggle"/>
+                        <field name="is_china_order" readonly="1" widget="boolean_toggle"/>
+                    </group>
+                </group>
+                <group string="China Logistics"
+                       invisible="not is_china_order">
+                    <field name="etd_china"/>
+                    <field name="eta_manchester"/>
+                    <field name="incoterm_note"/>
+                </group>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     CRM LEAD – Casting Tab
+══════════════════════════════════════════ -->
+<record id="view_crm_lead_casting_form" model="ir.ui.view">
+    <field name="name">crm.lead.casting.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_all_leads"/>
+    <field name="arch" type="xml">
+        <page name="extra" position="after">
+            <page name="casting" string="Casting Details">
+                <group>
+                    <group string="Technical">
+                        <field name="casting_process_id"/>
+                        <field name="industry"/>
+                        <field name="alloy_spec"/>
+                        <field name="quantity_annual"/>
+                        <field name="weight_grams"/>
+                        <field name="drawing_ref"/>
+                        <field name="has_cad"/>
+                        <field name="supply_route" widget="radio"/>
+                    </group>
+                    <group string="Commercial">
+                        <field name="ppap_required"/>
+                        <field name="ppap_level" invisible="not ppap_required"/>
+                        <field name="nda_signed"/>
+                        <field name="cert_standard"/>
+                        <field name="lead_source"/>
+                        <field name="enquiry_id" readonly="1"/>
+                    </group>
+                </group>
+                <div>
+                    <button name="action_create_casting_enquiry"
+                            string="Convert to Casting Enquiry"
+                            type="object" class="btn-primary"
+                            invisible="enquiry_id"/>
+                </div>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     MAINTENANCE – Foundry Equipment Tab
+══════════════════════════════════════════ -->
+<record id="view_maintenance_equipment_foundry_form" model="ir.ui.view">
+    <field name="name">maintenance.equipment.foundry.form</field>
+    <field name="model">maintenance.equipment</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+    <field name="arch" type="xml">
+        <page name="description" position="after">
+            <page name="foundry" string="Foundry Details">
+                <group>
+                    <group string="Classification">
+                        <field name="foundry_zone"/>
+                        <field name="casting_process_id"/>
+                        <field name="max_capacity_kg"/>
+                        <field name="max_temp_c"/>
+                    </group>
+                    <group string="Operating Hours">
+                        <field name="operating_hours"/>
+                        <field name="hours_since_service"/>
+                    </group>
+                </group>
+                <group string="PPM Schedule">
+                    <group>
+                        <field name="ppm_interval_days"/>
+                        <field name="last_ppm_date"/>
+                        <field name="next_ppm_due" readonly="1"/>
+                        <field name="ppm_overdue" readonly="1" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <button name="action_log_ppm" string="✅ Log PPM Completed"
+                                type="object" class="btn-success"
+                                invisible="ppm_overdue == False"/>
+                    </group>
+                </group>
+                <group string="Statutory Inspections">
+                    <group string="LOLER (Lifting Equipment)">
+                        <field name="loler_required" widget="boolean_toggle"/>
+                        <field name="loler_cert_date" invisible="not loler_required"/>
+                        <field name="loler_next_due" readonly="1" invisible="not loler_required"/>
+                        <field name="loler_overdue" readonly="1" widget="boolean_toggle"
+                               invisible="not loler_required"/>
+                    </group>
+                    <group string="Pressure Vessel (PSSR)">
+                        <field name="pressure_vessel" widget="boolean_toggle"/>
+                        <field name="pssr_next_inspection" invisible="not pressure_vessel"/>
+                    </group>
+                </group>
+                <group string="Calibration">
+                    <group>
+                        <field name="calibration_required" widget="boolean_toggle"/>
+                        <field name="calibration_cert_ref" invisible="not calibration_required"/>
+                        <field name="calibration_due" invisible="not calibration_required"/>
+                        <field name="calibration_overdue" readonly="1" widget="boolean_toggle"
+                               invisible="not calibration_required"/>
+                    </group>
+                </group>
+            </page>
+        </page>
+        <!-- Add overdue badge to equipment list -->
+        <div name="button_box" position="inside">
+            <button class="oe_stat_button" type="object"
+                    name="action_log_ppm"
+                    icon="fa-wrench"
+                    invisible="not ppm_overdue">
+                <div class="o_stat_info o_field_widget">
+                    <span class="o_stat_text text-danger">PPM Overdue</span>
+                </div>
+            </button>
+        </div>
+    </field>
+</record>
+
+<!-- Maintenance equipment list – add foundry columns -->
+<record id="view_maintenance_equipment_foundry_list" model="ir.ui.view">
+    <field name="name">maintenance.equipment.foundry.list</field>
+    <field name="model">maintenance.equipment</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_tree_view"/>
+    <field name="arch" type="xml">
+        <field name="category_id" position="after">
+            <field name="foundry_zone" optional="show"/>
+            <field name="next_ppm_due" optional="show"/>
+            <field name="ppm_overdue" optional="show" widget="boolean_toggle"/>
+            <field name="loler_next_due" optional="hide"/>
+            <field name="calibration_due" optional="hide"/>
+        </field>
+    </field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     HR ATTENDANCE – Foundry columns
+══════════════════════════════════════════ -->
+<record id="view_hr_attendance_foundry_list" model="ir.ui.view">
+    <field name="name">hr.attendance.foundry.list</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+    <field name="arch" type="xml">
+        <field name="worked_hours" position="after">
+            <field name="shift_type" optional="show"/>
+            <field name="overtime_hours" optional="show"/>
+            <field name="late_arrival" optional="show" widget="boolean_toggle"/>
+            <field name="is_bank_holiday" optional="hide" widget="boolean_toggle"/>
+        </field>
+    </field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     STOCK LOT – Casting traceability tab
+══════════════════════════════════════════ -->
+<record id="view_stock_lot_casting_form" model="ir.ui.view">
+    <field name="name">stock.lot.casting.form</field>
+    <field name="model">stock.lot</field>
+    <field name="inherit_id" ref="stock.view_production_lot_form"/>
+    <field name="arch" type="xml">
+        <page name="traceability" position="after">
+            <page name="casting_trace" string="Casting Traceability">
+                <group>
+                    <group string="Material">
+                        <field name="heat_number"/>
+                        <field name="alloy_spec"/>
+                        <field name="material_cert_ref"/>
+                        <field name="casting_process_id"/>
+                        <field name="production_site"/>
+                    </group>
+                    <group string="Customer &amp; Approval">
+                        <field name="customer_id"/>
+                        <field name="ppap_approved" widget="boolean_toggle"/>
+                        <field name="inspection_count" readonly="1"/>
+                    </group>
+                </group>
+                <div>
+                    <button name="action_view_inspections"
+                            string="View Quality Inspections"
+                            type="object" class="btn-secondary"
+                            invisible="inspection_count == 0"/>
+                </div>
+            </page>
+        </page>
+    </field>
+</record>
+
+</odoo>

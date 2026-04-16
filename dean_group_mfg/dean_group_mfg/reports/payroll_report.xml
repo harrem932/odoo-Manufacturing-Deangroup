@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ════════════════════════════════════════
+     PAYROLL SUMMARY REPORT
+════════════════════════════════════════ -->
+<template id="report_payroll_document">
+    <t t-call="web.external_layout">
+        <t t-set="doc" t-value="doc"/>
+        <div style="font-family:Arial,sans-serif;padding:16px">
+
+            <table width="100%" style="border-bottom:3px solid #d94f0c;margin-bottom:16px;padding-bottom:12px">
+                <tr>
+                    <td>
+                        <h1 style="color:#d94f0c;font-size:18px;margin:0">PAYSLIP</h1>
+                        <p style="font-size:10px;color:#555;margin:4px 0">
+                            <strong>Dean Group International Ltd</strong><br/>
+                            Brinell Drive, Northbank Industrial Park, Irlam, Manchester M44 5BL<br/>
+                            PAYE Ref: 123/A4567 · NI Number on file
+                        </p>
+                    </td>
+                    <td style="text-align:right;vertical-align:top">
+                        <div style="background:#d94f0c;color:#fff;padding:8px 14px;border-radius:3px;font-size:12px;font-weight:bold">
+                            <t t-esc="doc.name"/>
+                        </div>
+                        <p style="font-size:9px;color:#777;margin-top:6px">
+                            Period: <t t-esc="doc.date_from"/> to <t t-esc="doc.date_to"/>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Employee details -->
+            <table width="100%" style="border-collapse:collapse;font-size:10px;margin-bottom:14px">
+                <tr style="background:#f5f5f5">
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold;width:25%">Employee</td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%"><t t-esc="doc.employee_id.name"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold;width:25%">Job Title</td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%"><t t-esc="doc.employee_id.job_id.name if doc.employee_id.job_id else ''"/></td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold">Department</td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.employee_id.department_id.name if doc.employee_id.department_id else ''"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold">Payment Date</td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.date_to"/></td>
+                </tr>
+            </table>
+
+            <!-- Pay lines -->
+            <table width="100%" style="border-collapse:collapse;font-size:10px;margin-bottom:14px">
+                <thead>
+                    <tr style="background:#555;color:#fff">
+                        <th style="padding:6px 8px;text-align:left">Description</th>
+                        <th style="padding:6px 8px;text-align:right">Amount (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.line_ids" t-as="line">
+                        <t t-if="line.appears_on_payslip">
+                            <tr t-att-style="'background:#f9f9f9' if line_odd else ''">
+                                <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="line.name"/></td>
+                                <td style="padding:5px 8px;border:1px solid #ddd;text-align:right">
+                                    <span t-att-style="'color:#dc2626' if (line.total or 0) &lt; 0 else ''">
+                                        <t t-esc="'%.2f' % (line.total or 0)"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+                <tfoot>
+                    <tr style="background:#d94f0c;color:#fff;font-weight:bold">
+                        <td style="padding:8px">NET PAY</td>
+                        <td style="padding:8px;text-align:right;font-size:14px">
+                            £<t t-esc="'%.2f' % (doc.net_wage or 0)"/>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div style="font-size:8px;color:#888;margin-top:16px;border-top:1px solid #ddd;padding-top:8px;text-align:center">
+                Dean Group International Ltd · Payroll processed via Odoo HR · HMRC RTI Compliant
+                · This payslip is confidential. Please retain for your records.
+            </div>
+        </div>
+    </t>
+</template>
+
+<record id="action_report_payslip" model="ir.actions.report">
+    <field name="name">Payslip</field>
+    <field name="model">hr.payslip</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">dean_group_mfg.report_payroll_document</field>
+    <field name="report_file">dean_group_mfg.report_payroll_document</field>
+    <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+    <field name="binding_type">report</field>
+</record>
+
+</odoo>

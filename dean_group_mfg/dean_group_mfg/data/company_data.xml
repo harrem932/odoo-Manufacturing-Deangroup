@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Workcenters -->
+<record id="wc_investment_casting" model="mrp.workcenter">
+    <field name="name">Investment Casting Line</field>
+    <field name="code">IC</field>
+    <field name="time_efficiency">90.0</field>
+    <field name="costs_hour">85.0</field>
+    <field name="note">UK Foundry – Manchester. Wax injection, shell room, dewax, casting furnace.</field>
+</record>
+<record id="wc_die_casting" model="mrp.workcenter">
+    <field name="name">Die Casting Cell</field>
+    <field name="code">DC</field>
+    <field name="time_efficiency">85.0</field>
+    <field name="costs_hour">75.0</field>
+    <field name="note">High-pressure and gravity die casting. ADC12 / aluminium alloys.</field>
+</record>
+<record id="wc_aluminium_elite" model="mrp.workcenter">
+    <field name="name">Aluminium ELITE Line</field>
+    <field name="code">AL</field>
+    <field name="time_efficiency">88.0</field>
+    <field name="costs_hour">80.0</field>
+    <field name="note">UK proprietary ELITE process for high-integrity aluminium castings.</field>
+</record>
+<record id="wc_cnc_machining" model="mrp.workcenter">
+    <field name="name">CNC Machining Centre</field>
+    <field name="code">CNC</field>
+    <field name="time_efficiency">92.0</field>
+    <field name="costs_hour">95.0</field>
+    <field name="note">Fanuc and Haas CNC turning and milling. 3-axis and 4-axis capability.</field>
+</record>
+<record id="wc_quality" model="mrp.workcenter">
+    <field name="name">Quality Inspection</field>
+    <field name="code">QI</field>
+    <field name="time_efficiency">95.0</field>
+    <field name="costs_hour">60.0</field>
+    <field name="note">CMM, visual inspection, chemical analysis, NDT.</field>
+</record>
+<record id="wc_despatch" model="mrp.workcenter">
+    <field name="name">Packing &amp; Despatch</field>
+    <field name="code">PD</field>
+    <field name="time_efficiency">98.0</field>
+    <field name="costs_hour">40.0</field>
+    <field name="note">Packaging, labelling, CoC documentation, carrier booking.</field>
+</record>
+</odoo>

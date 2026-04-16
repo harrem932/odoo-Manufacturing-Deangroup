@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Manufacturing Order: Casting Tab -->
+<record id="view_mrp_production_casting_form" model="ir.ui.view">
+    <field name="name">mrp.production.casting.form</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+    <field name="arch" type="xml">
+        <page name="moves_finished" position="after">
+            <page name="casting_details" string="Casting Details">
+                <group>
+                    <group string="Process and Material">
+                        <field name="casting_process_id"/>
+                        <field name="alloy_spec"/>
+                        <field name="mould_tool_ref"/>
+                        <field name="drawing_rev"/>
+                        <field name="heat_lot_no"/>
+                        <field name="supply_site" widget="radio"/>
+                    </group>
+                    <group string="Weight and Yield">
+                        <field name="wax_weight_g"/>
+                        <field name="metal_weight_g"/>
+                        <field name="casting_yield" readonly="1"/>
+                        <field name="qty_scrapped"/>
+                        <field name="qty_reworked"/>
+                        <field name="scrap_cost"/>
+                        <field name="ncr_ref"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Customer">
+                        <field name="customer_id"/>
+                        <field name="customer_order_ref"/>
+                        <field name="delivery_deadline"/>
+                        <field name="enquiry_id"/>
+                    </group>
+                    <group string="Quality">
+                        <field name="ppap_required"/>
+                        <field name="ppap_level" invisible="not ppap_required"/>
+                        <field name="first_article"/>
+                        <field name="cert_language"/>
+                        <field name="quality_hold"/>
+                        <field name="quality_hold_reason" invisible="not quality_hold"/>
+                    </group>
+                </group>
+            </page>
+        </page>
+        <div name="button_box" position="inside">
+            <button name="action_place_quality_hold" string="Place Hold"
+                    type="object" class="oe_stat_button" icon="fa-pause-circle"
+                    invisible="quality_hold"/>
+            <button name="action_release_quality_hold" string="Release Hold"
+                    type="object" class="oe_stat_button" icon="fa-play-circle"
+                    invisible="not quality_hold"/>
+        </div>
+    </field>
+</record>
+
+<!-- MO List: extra casting columns -->
+<record id="view_mrp_production_casting_list" model="ir.ui.view">
+    <field name="name">mrp.production.casting.list</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+    <field name="arch" type="xml">
+        <field name="product_id" position="after">
+            <field name="casting_process_id" optional="show"/>
+            <field name="supply_site" optional="show"/>
+            <field name="customer_id" optional="show"/>
+            <field name="quality_hold" optional="show" widget="boolean_toggle"/>
+        </field>
+    </field>
+</record>
+
+<!-- BOM: Casting Specification tab -->
+<record id="view_mrp_bom_casting_form" model="ir.ui.view">
+    <field name="name">mrp.bom.casting.form</field>
+    <field name="model">mrp.bom</field>
+    <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+    <field name="arch" type="xml">
+        <page name="operations" position="after">
+            <page name="casting_spec" string="Casting Specification">
+                <group>
+                    <group string="Process">
+                        <field name="casting_process_id"/>
+                        <field name="alloy_spec"/>
+                        <field name="tool_ref"/>
+                        <field name="supply_site" widget="radio"/>
+                    </group>
+                    <group string="Finishing and Quality">
+                        <field name="surface_treatment"/>
+                        <field name="ppap_required"/>
+                    </group>
+                </group>
+                <field name="notes" placeholder="Engineering notes..."/>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Shift Schedule list -->
+<record id="view_shift_schedule_list" model="ir.ui.view">
+    <field name="name">dg.shift.schedule.list</field>
+    <field name="model">dg.shift.schedule</field>
+    <field name="arch" type="xml">
+        <list string="Shift Schedules"
+              decoration-success="state=='published'"
+              decoration-warning="state=='draft'">
+            <field name="name"/>
+            <field name="week_start"/>
+            <field name="week_end"/>
+            <field name="state" widget="badge"
+                   decoration-success="state=='published'"
+                   decoration-warning="state=='draft'"/>
+            <field name="published" widget="boolean_toggle"/>
+        </list>
+    </field>
+</record>
+
+<!-- Shift Schedule form -->
+<record id="view_shift_schedule_form" model="ir.ui.view">
+    <field name="name">dg.shift.schedule.form</field>
+    <field name="model">dg.shift.schedule</field>
+    <field name="arch" type="xml">
+        <form string="Shift Schedule">
+            <header>
+                <button name="action_publish" string="Publish to Employees"
+                        type="object" class="btn-primary"
+                        invisible="state != 'draft'"/>
+                <field name="state" widget="statusbar"
+                       statusbar_visible="draft,published"/>
+            </header>
+            <sheet>
+                <div class="oe_title">
+                    <h1><field name="name" readonly="1"/></h1>
+                </div>
+                <group>
+                    <field name="week_start"/>
+                    <field name="week_end" readonly="1"/>
+                    <field name="notes" placeholder="Notes for this week..."/>
+                </group>
+                <field name="shift_line_ids">
+                    <list editable="bottom">
+                        <field name="employee_id"/>
+                        <field name="shift"/>
+                        <field name="mon"/>
+                        <field name="tue"/>
+                        <field name="wed"/>
+                        <field name="thu"/>
+                        <field name="fri"/>
+                        <field name="sat"/>
+                        <field name="sun"/>
+                        <field name="notes"/>
+                    </list>
+                </field>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="action_shift_schedule" model="ir.actions.act_window">
+    <field name="name">Shift Schedules</field>
+    <field name="res_model">dg.shift.schedule</field>
+    <field name="view_mode">list,form</field>
+</record>
+
+<!-- Maintenance Equipment: Foundry tab -->
+<record id="view_maintenance_equipment_foundry_form" model="ir.ui.view">
+    <field name="name">maintenance.equipment.foundry.form</field>
+    <field name="model">maintenance.equipment</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+    <field name="arch" type="xml">
+        <page name="description" position="after">
+            <page name="foundry_details" string="Foundry Details">
+                <group>
+                    <group string="Classification">
+                        <field name="foundry_zone"/>
+                        <field name="casting_process_id"/>
+                        <field name="max_capacity_kg"/>
+                        <field name="max_temp_c"/>
+                        <field name="operating_hours"/>
+                    </group>
+                    <group string="PPM Schedule">
+                        <field name="ppm_interval_days"/>
+                        <field name="last_ppm_date"/>
+                        <field name="next_ppm_due" readonly="1"/>
+                        <field name="ppm_overdue" readonly="1" widget="boolean_toggle"/>
+                        <button name="action_log_ppm" string="Log PPM Done"
+                                type="object" class="btn-success"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Statutory">
+                        <field name="loler_required"/>
+                        <field name="loler_cert_date" invisible="not loler_required"/>
+                        <field name="loler_next_due" readonly="1" invisible="not loler_required"/>
+                        <field name="loler_overdue" readonly="1" invisible="not loler_required" widget="boolean_toggle"/>
+                        <field name="pressure_vessel"/>
+                        <field name="pssr_next_inspection" invisible="not pressure_vessel"/>
+                    </group>
+                    <group string="Calibration">
+                        <field name="calibration_required"/>
+                        <field name="calibration_cert_ref" invisible="not calibration_required"/>
+                        <field name="calibration_due" invisible="not calibration_required"/>
+                        <field name="calibration_overdue" readonly="1"
+                               invisible="not calibration_required" widget="boolean_toggle"/>
+                    </group>
+                </group>
+            </page>
+        </page>
+    </field>
+</record>
+
+<record id="view_maintenance_equipment_foundry_list" model="ir.ui.view">
+    <field name="name">maintenance.equipment.foundry.list</field>
+    <field name="model">maintenance.equipment</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_view_list"/>
+    <field name="arch" type="xml">
+        <field name="category_id" position="after">
+            <field name="foundry_zone" optional="show"/>
+            <field name="next_ppm_due" optional="show"/>
+            <field name="ppm_overdue" optional="show" widget="boolean_toggle"/>
+            <field name="loler_overdue" optional="show" widget="boolean_toggle"/>
+            <field name="calibration_overdue" optional="show" widget="boolean_toggle"/>
+        </field>
+    </field>
+</record>
+
+<!-- CRM Lead: Casting tab -->
+<record id="view_crm_lead_casting_form" model="ir.ui.view">
+    <field name="name">crm.lead.casting.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_all_leads"/>
+    <field name="arch" type="xml">
+        <page name="extra" position="before">
+            <page name="casting_info" string="Casting Details">
+                <group>
+                    <group string="Technical">
+                        <field name="casting_process_id"/>
+                        <field name="alloy_spec"/>
+                        <field name="quantity_annual"/>
+                        <field name="weight_grams"/>
+                        <field name="drawing_ref"/>
+                        <field name="has_cad"/>
+                        <field name="supply_route" widget="radio"/>
+                    </group>
+                    <group string="Commercial">
+                        <field name="industry"/>
+                        <field name="ppap_required"/>
+                        <field name="ppap_level" invisible="not ppap_required"/>
+                        <field name="cert_standard"/>
+                        <field name="nda_signed"/>
+                        <field name="lead_source"/>
+                        <field name="enquiry_id"/>
+                    </group>
+                </group>
+                <button name="action_create_casting_enquiry"
+                        string="Convert to Casting Enquiry"
+                        type="object" class="btn-primary"
+                        icon="fa-exchange"
+                        invisible="enquiry_id"/>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Sale Order: Casting and Delivery tab -->
+<record id="view_sale_order_casting_form" model="ir.ui.view">
+    <field name="name">sale.order.casting.form</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <page name="order_lines" position="after">
+            <page name="casting_delivery" string="Casting and Delivery">
+                <group>
+                    <group string="Casting Details">
+                        <field name="casting_enquiry_id"/>
+                        <field name="alloy_spec"/>
+                        <field name="drawing_ref"/>
+                        <field name="supply_site" widget="radio"/>
+                        <field name="customer_po_ref"/>
+                        <field name="industry"/>
+                    </group>
+                    <group string="Quality and Certification">
+                        <field name="cert_required"/>
+                        <field name="cert_language" invisible="not cert_required"/>
+                        <field name="ppap_required"/>
+                        <field name="ppap_level" invisible="not ppap_required"/>
+                        <field name="nda_in_place"/>
+                    </group>
+                </group>
+                <field name="inspection_note"
+                       placeholder="Inspection requirements, special standards..."/>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Purchase Order: China Supply tab -->
+<record id="view_purchase_order_casting_form" model="ir.ui.view">
+    <field name="name">purchase.order.casting.form</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+        <page name="order_line" position="after">
+            <page name="casting_supply" string="Casting Supply">
+                <group>
+                    <group string="Supply Details">
+                        <field name="china_supply_id"/>
+                        <field name="casting_process_id"/>
+                        <field name="is_china_order" readonly="1"/>
+                        <field name="incoterm_note" invisible="not is_china_order"/>
+                        <field name="etd_china" invisible="not is_china_order"/>
+                        <field name="eta_manchester" invisible="not is_china_order"/>
+                    </group>
+                    <group string="Supplier and Quality">
+                        <field name="supplier_approved"/>
+                        <field name="supplier_iso_cert"/>
+                        <field name="quality_gate"/>
+                        <field name="cert_required"/>
+                        <field name="cert_received"/>
+                        <field name="quarantine_required"/>
+                    </group>
+                </group>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Stock Lot: Casting traceability tab -->
+<record id="view_stock_lot_casting_form" model="ir.ui.view">
+    <field name="name">stock.lot.casting.form</field>
+    <field name="model">stock.lot</field>
+    <field name="inherit_id" ref="stock.view_production_lot_form"/>
+    <field name="arch" type="xml">
+        <group position="inside">
+            <group string="Casting Traceability">
+                <field name="heat_number"/>
+                <field name="alloy_spec"/>
+                <field name="material_cert_ref"/>
+                <field name="casting_process_id"/>
+                <field name="production_site"/>
+                <field name="customer_id"/>
+                <field name="ppap_approved"/>
+            </group>
+        </group>
+        <div name="button_box" position="inside">
+            <button class="oe_stat_button" type="object"
+                    name="action_view_inspections" icon="fa-check-square"
+                    invisible="inspection_count == 0">
+                <field name="inspection_count" widget="statinfo" string="QC"/>
+            </button>
+        </div>
+    </field>
+</record>
+
+<!-- Additional menus for new functionality -->
+<menuitem id="menu_shift_schedule"
+    name="Shift Schedules"
+    parent="menu_dg_hr"
+    action="action_shift_schedule"
+    sequence="45"/>
+
+<menuitem id="menu_quote_wizard"
+    name="New Enquiry (Wizard)"
+    parent="menu_dg_sales"
+    action="action_casting_quote_wizard"
+    sequence="5"/>
+
+<menuitem id="menu_bulk_certs"
+    name="Bulk Certificate Generator"
+    parent="menu_dg_quality"
+    action="action_bulk_cert_wizard"
+    sequence="30"/>
+
+</odoo>

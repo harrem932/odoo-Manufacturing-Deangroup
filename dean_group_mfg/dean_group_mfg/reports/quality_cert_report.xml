@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_quality_cert_document">
+    <t t-call="web.external_layout">
+        <t t-set="doc" t-value="doc"/>
+
+        <!-- Per-language label dictionaries -->
+        <t t-set="L" t-value="{
+            'en': {
+                'title':        'CERTIFICATE OF CONFORMITY',
+                'date':         'Inspection Date',
+                'customer':     'Customer / Client',
+                'ref':          'Our Reference',
+                'component':    'Component',
+                'batch':        'Batch / Lot',
+                'type':         'Inspection Type',
+                'inspector':    'Inspector',
+                'qty_insp':     'Qty Inspected',
+                'qty_acc':      'Qty Accepted',
+                'qty_rej':      'Qty Rejected',
+                'rej_pct':      'Rejection %',
+                'dimensional':  'Dimensional Inspection',
+                'visual':       'Visual Inspection',
+                'chemical':     'Chemical / Material',
+                'ndt':          'NDT Inspection',
+                'overall':      'Overall Result',
+                'pass':         'PASS – Released for Delivery',
+                'fail':         'FAIL – Rework Required',
+                'scrap':        'SCRAP – Rejected',
+                'hold':         'HOLD – Pending Decision',
+                'sig_insp':     'Inspector',
+                'sig_qm':       'Quality Manager',
+                'sig_date':     'Date Issued',
+                'footer':       'This certificate is valid only when accompanied by an original company stamp. ISO 9001:2015 certified.',
+                'mat_cert':     'Material Cert Ref',
+                'notes':        'Inspector Notes',
+            },
+            'zh': {
+                'title':        '合格证书',
+                'date':         '检验日期',
+                'customer':     '客户',
+                'ref':          '我司参考编号',
+                'component':    '零件',
+                'batch':        '批次/炉号',
+                'type':         '检验类型',
+                'inspector':    '检验员',
+                'qty_insp':     '检验数量',
+                'qty_acc':      '合格数量',
+                'qty_rej':      '不合格数量',
+                'rej_pct':      '不合格率',
+                'dimensional':  '尺寸检验',
+                'visual':       '外观检验',
+                'chemical':     '化学成分检验',
+                'ndt':          '无损检测',
+                'overall':      '综合结论',
+                'pass':         '合格 – 准予出货',
+                'fail':         '不合格 – 需返工',
+                'scrap':        '报废',
+                'hold':         '待定',
+                'sig_insp':     '检验员',
+                'sig_qm':       '质量经理',
+                'sig_date':     '签发日期',
+                'footer':       '本证书仅在附有公司原始印章时有效。ISO 9001:2015认证。',
+                'mat_cert':     '材质证书编号',
+                'notes':        '检验备注',
+            },
+            'de': {
+                'title':        'KONFORMITÄTSZERTIFIKAT',
+                'date':         'Prüfdatum',
+                'customer':     'Kunde',
+                'ref':          'Unsere Referenz',
+                'component':    'Bauteil',
+                'batch':        'Charge / Los',
+                'type':         'Prüfungsart',
+                'inspector':    'Prüfer',
+                'qty_insp':     'Geprüfte Menge',
+                'qty_acc':      'Akzeptierte Menge',
+                'qty_rej':      'Zurückgewiesene Menge',
+                'rej_pct':      'Ausschussquote',
+                'dimensional':  'Maßprüfung',
+                'visual':       'Sichtprüfung',
+                'chemical':     'Chemische Analyse',
+                'ndt':          'ZfP-Prüfung',
+                'overall':      'Gesamtergebnis',
+                'pass':         'BESTANDEN – Freigegeben',
+                'fail':         'NICHT BESTANDEN – Nacharbeit erforderlich',
+                'scrap':        'AUSSCHUSS',
+                'hold':         'GESPERRT – Entscheidung ausstehend',
+                'sig_insp':     'Prüfer',
+                'sig_qm':       'Qualitätsmanager',
+                'sig_date':     'Ausstellungsdatum',
+                'footer':       'Dieses Zertifikat ist nur mit originalem Firmenstempel gültig. ISO 9001:2015 zertifiziert.',
+                'mat_cert':     'Werkstoffzeugnisreferenz',
+                'notes':        'Prüfnotizen',
+            },
+            'fr': {
+                'title':        'CERTIFICAT DE CONFORMITÉ',
+                'date':         'Date d\'inspection',
+                'customer':     'Client',
+                'ref':          'Notre référence',
+                'component':    'Composant',
+                'batch':        'Lot / Coulée',
+                'type':         'Type d\'inspection',
+                'inspector':    'Inspecteur',
+                'qty_insp':     'Quantité inspectée',
+                'qty_acc':      'Quantité acceptée',
+                'qty_rej':      'Quantité rejetée',
+                'rej_pct':      'Taux de rebut',
+                'dimensional':  'Contrôle dimensionnel',
+                'visual':       'Contrôle visuel',
+                'chemical':     'Analyse chimique',
+                'ndt':          'Contrôle CND',
+                'overall':      'Résultat global',
+                'pass':         'CONFORME – Libéré pour livraison',
+                'fail':         'NON CONFORME – Retouche requise',
+                'scrap':        'REBUT',
+                'hold':         'BLOQUÉ – Décision en attente',
+                'sig_insp':     'Inspecteur',
+                'sig_qm':       'Responsable Qualité',
+                'sig_date':     'Date d\'émission',
+                'footer':       'Ce certificat n\'est valable qu\'accompagné du tampon original de la société. Certifié ISO 9001:2015.',
+                'mat_cert':     'Référence certificat matière',
+                'notes':        'Notes de l\'inspecteur',
+            },
+            'ar': {
+                'title':        'شهادة المطابقة',
+                'date':         'تاريخ الفحص',
+                'customer':     'العميل',
+                'ref':          'مرجعنا',
+                'component':    'المكوّن',
+                'batch':        'الدفعة / الصهر',
+                'type':         'نوع الفحص',
+                'inspector':    'المفتش',
+                'qty_insp':     'الكمية المفحوصة',
+                'qty_acc':      'الكمية المقبولة',
+                'qty_rej':      'الكمية المرفوضة',
+                'rej_pct':      'نسبة الرفض',
+                'dimensional':  'الفحص البُعدي',
+                'visual':       'الفحص البصري',
+                'chemical':     'التحليل الكيميائي',
+                'ndt':          'الاختبار غير التدميري',
+                'overall':      'النتيجة الإجمالية',
+                'pass':         'مطابق – مُطلق للتسليم',
+                'fail':         'غير مطابق – مطلوب إعادة معالجة',
+                'scrap':        'خردة – مرفوض',
+                'hold':         'معلّق – قيد البت',
+                'sig_insp':     'المفتش',
+                'sig_qm':       'مدير الجودة',
+                'sig_date':     'تاريخ الإصدار',
+                'footer':       'هذه الشهادة صالحة فقط عند مرافقتها لختم الشركة الأصلي. معتمد ISO 9001:2015.',
+                'mat_cert':     'مرجع شهادة المادة',
+                'notes':        'ملاحظات المفتش',
+            },
+        }"/>
+
+        <t t-set="lang" t-value="doc.cert_language or 'en'"/>
+        <t t-set="lbl" t-value="L.get(lang, L['en'])"/>
+        <t t-set="rtl" t-value="lang == 'ar'"/>
+
+        <div t-att-style="'font-family: Arial, sans-serif; padding: 16px; direction: ' + ('rtl' if rtl else 'ltr')">
+
+            <!-- HEADER -->
+            <table width="100%" style="border-bottom: 3px solid #d94f0c; margin-bottom: 16px; padding-bottom: 12px">
+                <tr>
+                    <td>
+                        <h1 style="color:#d94f0c;font-size:20px;margin:0"><t t-esc="lbl['title']"/></h1>
+                        <p style="margin:4px 0;font-size:10px;color:#555">
+                            <strong>Dean Group International Ltd</strong><br/>
+                            Brinell Drive, Northbank Industrial Park, Irlam, Manchester M44 5BL, UK<br/>
+                            Tel: 0161 775 1633 · Email: sales@deangroup-int.co.uk<br/>
+                            VAT: GB146307478 · Company No: 1062820
+                        </p>
+                    </td>
+                    <td style="text-align:right;vertical-align:top">
+                        <div style="background:#d94f0c;color:#fff;padding:8px 14px;border-radius:3px;font-size:13px;font-weight:bold">
+                            <t t-esc="doc.name"/>
+                        </div>
+                        <p style="font-size:9px;color:#777;margin-top:6px">
+                            ISO 9001:2015 Certified<br/>
+                            BSI Cert No. FS 25398
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- DETAILS TABLE -->
+            <table width="100%" style="border-collapse:collapse;margin-bottom:14px;font-size:10px">
+                <tr style="background:#f5f5f5">
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%;font-weight:bold"><t t-esc="lbl['ref']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%"><t t-esc="doc.name"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%;font-weight:bold"><t t-esc="lbl['date']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;width:25%"><t t-esc="doc.inspection_date"/></td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['customer']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.partner_id.name if doc.partner_id else ''"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['type']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="dict(doc._fields['inspection_type'].selection).get(doc.inspection_type,'')"/></td>
+                </tr>
+                <tr style="background:#f5f5f5">
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['component']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.product_id.name if doc.product_id else 'N/A'"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['batch']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.lot_id.name if doc.lot_id else 'N/A'"/></td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['inspector']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.inspector_id.name if doc.inspector_id else ''"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-weight:bold"><t t-esc="lbl['mat_cert']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="doc.material_cert_ref or 'N/A'"/></td>
+                </tr>
+            </table>
+
+            <!-- QTY TABLE -->
+            <table width="100%" style="border-collapse:collapse;margin-bottom:14px;font-size:10px">
+                <tr style="background:#d94f0c;color:#fff">
+                    <th style="padding:6px 8px;text-align:left"><t t-esc="lbl['qty_insp']"/></th>
+                    <th style="padding:6px 8px;text-align:left"><t t-esc="lbl['qty_acc']"/></th>
+                    <th style="padding:6px 8px;text-align:left"><t t-esc="lbl['qty_rej']"/></th>
+                    <th style="padding:6px 8px;text-align:left"><t t-esc="lbl['rej_pct']"/></th>
+                </tr>
+                <tr style="background:#fff8f5">
+                    <td style="padding:8px;border:1px solid #ddd;font-size:14px;font-weight:bold"><t t-esc="doc.qty_inspected"/></td>
+                    <td style="padding:8px;border:1px solid #ddd;font-size:14px;font-weight:bold;color:#15803d"><t t-esc="doc.qty_accepted"/></td>
+                    <td style="padding:8px;border:1px solid #ddd;font-size:14px;font-weight:bold;color:#dc2626"><t t-esc="doc.qty_rejected"/></td>
+                    <td style="padding:8px;border:1px solid #ddd;font-size:14px;font-weight:bold"><t t-esc="'%.1f%%' % (doc.rejection_pct or 0)"/></td>
+                </tr>
+            </table>
+
+            <!-- RESULTS TABLE -->
+            <table width="100%" style="border-collapse:collapse;margin-bottom:14px;font-size:10px">
+                <tr style="background:#555;color:#fff">
+                    <th style="padding:6px 8px;text-align:left;width:40%">Check</th>
+                    <th style="padding:6px 8px;text-align:center;width:20%">Result</th>
+                    <th style="padding:6px 8px;text-align:left">Notes</th>
+                </tr>
+                <tr style="background:#f9f9f9">
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="lbl['dimensional']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;text-align:center">
+                        <span t-att-style="'font-weight:bold;color:' + ('#15803d' if doc.dimensional_result=='pass' else '#dc2626' if doc.dimensional_result=='fail' else '#555')">
+                            <t t-esc="(doc.dimensional_result or 'N/A').upper()"/>
+                        </span>
+                    </td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-size:9px"><t t-esc="doc.dimensional_notes or ''"/></td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="lbl['visual']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;text-align:center">
+                        <span t-att-style="'font-weight:bold;color:' + ('#15803d' if doc.visual_result=='pass' else '#dc2626' if doc.visual_result=='fail' else '#555')">
+                            <t t-esc="(doc.visual_result or 'N/A').upper()"/>
+                        </span>
+                    </td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-size:9px"><t t-esc="doc.visual_notes or ''"/></td>
+                </tr>
+                <tr style="background:#f9f9f9">
+                    <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="lbl['chemical']"/></td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;text-align:center">
+                        <span t-att-style="'font-weight:bold;color:' + ('#15803d' if doc.chemical_result=='pass' else '#dc2626' if doc.chemical_result=='fail' else '#555')">
+                            <t t-esc="(doc.chemical_result or 'N/A').upper()"/>
+                        </span>
+                    </td>
+                    <td style="padding:5px 8px;border:1px solid #ddd;font-size:9px">Ref: <t t-esc="doc.material_cert_ref or 'N/A'"/></td>
+                </tr>
+                <t t-if="doc.ndt_required">
+                    <tr>
+                        <td style="padding:5px 8px;border:1px solid #ddd">
+                            <t t-esc="lbl['ndt']"/> –
+                            <t t-esc="dict(doc._fields.get('ndt_method',{}).get('selection',[])).get(doc.ndt_method,'') if doc.ndt_method else ''"/>
+                        </td>
+                        <td style="padding:5px 8px;border:1px solid #ddd;text-align:center">
+                            <span t-att-style="'font-weight:bold;color:' + ('#15803d' if doc.ndt_result=='pass' else '#dc2626' if doc.ndt_result=='fail' else '#555')">
+                                <t t-esc="(doc.ndt_result or 'N/A').upper()"/>
+                            </span>
+                        </td>
+                        <td style="padding:5px 8px;border:1px solid #ddd"></td>
+                    </tr>
+                </t>
+            </table>
+
+            <!-- OVERALL RESULT BANNER -->
+            <t t-set="pass_r" t-value="doc.overall_result == 'pass'"/>
+            <div t-att-style="'border-radius:4px;padding:12px;margin-bottom:14px;text-align:center;border:2px solid ' + ('#22c55e' if pass_r else '#ef4444') + ';background:' + ('#dcfce7' if pass_r else '#fef2f2')">
+                <strong t-att-style="'font-size:15px;color:' + ('#15803d' if pass_r else '#dc2626')">
+                    <t t-if="doc.overall_result == 'pass'"><t t-esc="lbl['pass']"/></t>
+                    <t t-elif="doc.overall_result == 'fail'"><t t-esc="lbl['fail']"/></t>
+                    <t t-elif="doc.overall_result == 'scrap'"><t t-esc="lbl['scrap']"/></t>
+                    <t t-else=""><t t-esc="lbl['hold']"/></t>
+                </strong>
+            </div>
+
+            <!-- NOTES -->
+            <t t-if="doc.notes">
+                <div style="background:#fff8f0;border-left:4px solid #d94f0c;padding:8px 12px;margin-bottom:14px;font-size:9px">
+                    <strong><t t-esc="lbl['notes']"/>:</strong> <t t-esc="doc.notes"/>
+                </div>
+            </t>
+
+            <!-- SIGNATURES -->
+            <table width="100%" style="margin-top:24px">
+                <tr>
+                    <td style="width:33%;border-top:1px solid #333;padding-top:6px;text-align:center;font-size:9px">
+                        <br/><t t-esc="doc.inspector_id.name if doc.inspector_id else ''"/><br/>
+                        <t t-esc="lbl['sig_insp']"/>
+                    </td>
+                    <td style="width:33%;border-top:1px solid #333;padding-top:6px;text-align:center;font-size:9px">
+                        <br/>Sarah McAllister<br/>
+                        <t t-esc="lbl['sig_qm']"/>
+                    </td>
+                    <td style="width:33%;border-top:1px solid #333;padding-top:6px;text-align:center;font-size:9px">
+                        <br/><t t-esc="doc.inspection_date"/><br/>
+                        <t t-esc="lbl['sig_date']"/>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- FOOTER -->
+            <div style="margin-top:20px;border-top:1px solid #ddd;padding-top:8px;font-size:8px;color:#888;text-align:center">
+                <t t-esc="lbl['footer']"/>
+            </div>
+        </div>
+    </t>
+</template>
+
+<record id="action_report_quality_cert" model="ir.actions.report">
+    <field name="name">Certificate of Conformity</field>
+    <field name="model">dg.quality.inspection</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">dean_group_mfg.report_quality_cert_document</field>
+    <field name="report_file">dean_group_mfg.report_quality_cert_document</field>
+    <field name="binding_model_id" ref="model_dg_quality_inspection"/>
+    <field name="binding_type">report</field>
+    <field name="paperformat_id" ref="base.paperformat_euro"/>
+</record>
+
+</odoo>

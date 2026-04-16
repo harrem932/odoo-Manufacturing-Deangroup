@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ════════════════════════════════════════
+     SERVICES PAGE
+════════════════════════════════════════ -->
+<template id="services_page" name="Dean Group – Services">
+    <t t-call="website.layout">
+        <section class="dg-section" style="padding-top:7rem">
+            <div class="container">
+                <div class="dg-label">Manufacturing Processes</div>
+                <h1 class="dg-heading">Our Casting &amp; Forming Services</h1>
+                <p class="dg-sub">From concept and CAD through casting, finishing and delivery. Specialists in investment casting, die casting, forging, MIM and 3D printing for casting.</p>
+                <div class="dg-svc-grid">
+                    <t t-foreach="processes" t-as="p">
+                        <div class="dg-svc-card">
+                            <div class="dg-svc-num">
+                                <t t-esc="'%02d' % (p_index + 1)"/> — <t t-esc="p.code.upper()"/>
+                            </div>
+                            <div class="dg-svc-title"><t t-esc="p.name"/></div>
+                            <p class="dg-svc-desc"><t t-esc="p.description or ''"/></p>
+                            <div class="dg-svc-meta">
+                                <span class="dg-tag dg-tag-fire">
+                                    <t t-if="p.supply_location == 'uk'">🇬🇧 UK Foundry</t>
+                                    <t t-elif="p.supply_location == 'china'">🌏 China Supply</t>
+                                    <t t-else="">🇬🇧+🌏 UK + China</t>
+                                </span>
+                                <t t-if="p.lead_time_uk">
+                                    <span class="dg-tag dg-tag-steel">UK: <t t-esc="p.lead_time_uk"/>d</span>
+                                </t>
+                                <t t-if="p.lead_time_china">
+                                    <span class="dg-tag dg-tag-steel">Asia: <t t-esc="p.lead_time_china"/>d</span>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div style="margin-top:3rem;text-align:center">
+                    <a href="/get-quote" class="dg-btn dg-btn-fire">Request a Quote for Your Process</a>
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+<!-- ════════════════════════════════════════
+     MARKETS PAGE
+════════════════════════════════════════ -->
+<template id="markets_page" name="Dean Group – Markets">
+    <t t-call="website.layout">
+        <section class="dg-section" style="padding-top:7rem">
+            <div class="container">
+                <div class="dg-label">Industry Sectors</div>
+                <h1 class="dg-heading">Markets We Serve</h1>
+                <p class="dg-sub">Critical components for the world's most demanding industries. Over 50 years supplying aerospace, defence, oil and gas, medical and rail sectors.</p>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem">
+
+                    <div class="dg-svc-card" id="aerospace">
+                        <div class="dg-svc-num">✈️ AEROSPACE</div>
+                        <div class="dg-svc-title">Aerospace</div>
+                        <p class="dg-svc-desc">High-integrity investment castings for airframe, engine and landing gear applications. Full PPAP, material certification and AS9100-compatible quality. Precision and commercial grade investment casting in stainless, titanium and nickel alloys.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="defence">
+                        <div class="dg-svc-num">🛡️ DEFENCE</div>
+                        <div class="dg-svc-title">Defence &amp; Military</div>
+                        <p class="dg-svc-desc">Military-grade precision castings with stringent quality requirements. UK-manufactured for security of supply. Investment casting, forging and MIM for defence applications including vehicle, ordnance and communications systems.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="energy">
+                        <div class="dg-svc-num">⚡ ENERGY &amp; POWER</div>
+                        <div class="dg-svc-title">Energy &amp; Power</div>
+                        <p class="dg-svc-desc">Reliable castings for power generation, renewable energy and distribution systems. Turbine components, housings, valve bodies and structural parts. Die casting and investment casting for high-volume energy sector components.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="medical">
+                        <div class="dg-svc-num">🏥 MEDICAL</div>
+                        <div class="dg-svc-title">Medical</div>
+                        <p class="dg-svc-desc">Biocompatible components for surgical instruments and medical devices. MIM and investment casting in 17-4PH, 316L and cobalt chrome. ISO 13485 quality process compatibility. Class I and Class II medical device components.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="rail">
+                        <div class="dg-svc-num">🚄 RAIL</div>
+                        <div class="dg-svc-title">Rail &amp; Transport</div>
+                        <p class="dg-svc-desc">Safety-critical components for rolling stock and rail infrastructure. Investment and aluminium die casting for bogie, door and interior systems. EN 15085 railway standard compatibility. UK and European supply.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="oil-gas">
+                        <div class="dg-svc-num">⚙️ OIL &amp; GAS</div>
+                        <div class="dg-svc-title">Oil &amp; Gas</div>
+                        <p class="dg-svc-desc">High-pressure, corrosion-resistant castings for upstream, midstream and downstream applications. Valve bodies, manifolds, connectors and flow control components. NACE MR-0175, ATEX and pressure testing available.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="engineering">
+                        <div class="dg-svc-num">🏗️ ENGINEERING</div>
+                        <div class="dg-svc-title">General Engineering</div>
+                        <p class="dg-svc-desc">Industrial and mechanical components for a wide range of engineering applications. Pumps, valves, housings, brackets and structural components. UK foundry and Asia supply for cost-effective volume production.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                    <div class="dg-svc-card" id="architecture">
+                        <div class="dg-svc-num">🏛️ ARCHITECTURE</div>
+                        <div class="dg-svc-title">Architecture</div>
+                        <p class="dg-svc-desc">Decorative and structural aluminium and bronze castings for architectural applications. Facade components, handles, brackets and bespoke architectural metalwork. Aluminium ELITE and gravity die casting processes.</p>
+                        <a href="/get-quote" class="dg-svc-arrow">Enquire →</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+<!-- ════════════════════════════════════════
+     CAREERS PAGE
+════════════════════════════════════════ -->
+<template id="careers_page" name="Dean Group – Careers">
+    <t t-call="website.layout">
+        <section class="dg-section" style="padding-top:7rem">
+            <div class="container">
+                <div class="dg-label">Join Our Team</div>
+                <h1 class="dg-heading">Careers at Dean Group International</h1>
+                <p class="dg-sub">We are a growing Manchester foundry with over 50 years of heritage. We invest heavily in people, training and apprenticeships. Our team is our greatest asset.</p>
+
+                <div style="background:var(--dg-card);border:1px solid var(--dg-border);border-radius:6px;padding:2rem;margin-bottom:2.5rem">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center">
+                        <div>
+                            <div style="font-size:2rem;font-weight:900;color:#fff">50<span style="color:var(--dg-fire)">+</span></div>
+                            <div style="font-size:.8rem;color:var(--dg-steel)">Years in business</div>
+                        </div>
+                        <div>
+                            <div style="font-size:2rem;font-weight:900;color:#fff">Manchester</div>
+                            <div style="font-size:.8rem;color:var(--dg-steel)">UK Foundry location</div>
+                        </div>
+                        <div>
+                            <div style="font-size:2rem;font-weight:900;color:#fff">NVQ</div>
+                            <div style="font-size:.8rem;color:var(--dg-steel)">Training &amp; apprenticeships</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="dg-heading" style="font-size:1.8rem;margin-bottom:1.5rem">Current Vacancies</h2>
+
+                <t t-if="jobs">
+                    <div class="dg-jobs-grid">
+                        <t t-foreach="jobs" t-as="job">
+                            <div class="dg-job-card">
+                                <div class="dg-job-tags">
+                                    <span class="dg-tag dg-tag-fire">
+                                        <t t-esc="job.no_of_recruitment"/> Position(s)
+                                    </span>
+                                    <span class="dg-tag dg-tag-steel">Manchester</span>
+                                </div>
+                                <div class="dg-job-title"><t t-esc="job.name"/></div>
+                                <p class="dg-job-desc"><t t-esc="job.description or 'See full job description on application.'"/></p>
+                                <a t-attf-href="/jobs/apply?job_id=#{job.id}" class="dg-btn dg-btn-fire dg-btn-sm">Apply Now</a>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div style="text-align:center;padding:3rem;color:var(--dg-steel)">
+                        <p style="font-size:1.1rem">No vacancies currently listed.</p>
+                        <p style="margin-top:.5rem">Send your CV speculatively to <a href="mailto:careers@deangroup-int.co.uk" style="color:var(--dg-ember)">careers@deangroup-int.co.uk</a></p>
+                    </div>
+                </t>
+
+                <div style="margin-top:3rem;background:rgba(217,79,12,.06);border:1px solid rgba(217,79,12,.2);border-radius:6px;padding:2rem">
+                    <h3 style="color:#fff;margin-bottom:.8rem">Why Work at Dean Group?</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ Over 50 years of foundry heritage in Manchester</div>
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ NVQ training programmes and funded apprenticeships</div>
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ Family-owned business with stable long-term employment</div>
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ Work with world-class clients in aerospace and defence</div>
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ Competitive salary and shift allowances</div>
+                        <div style="font-size:.88rem;color:var(--dg-mist)">✓ Modern plant and equipment investment</div>
+                    </div>
+                    <div style="margin-top:1.2rem;font-size:.85rem;color:var(--dg-steel)">
+                        Speculative applications welcome: <a href="mailto:careers@deangroup-int.co.uk" style="color:var(--dg-ember)">careers@deangroup-int.co.uk</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+<!-- ════════════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════════════ -->
+<template id="contact_page" name="Dean Group – Contact">
+    <t t-call="website.layout">
+        <section class="dg-section" style="padding-top:7rem">
+            <div class="container">
+                <div class="dg-label">Get In Touch</div>
+                <h1 class="dg-heading">Contact Dean Group International</h1>
+                <div class="dg-contact-wrap" style="margin-top:2.5rem">
+                    <form action="/contact/submit" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="dg-form-row">
+                            <div class="dg-form-group">
+                                <label>First Name *</label>
+                                <input type="text" name="first_name" required="required" placeholder="John"/>
+                            </div>
+                            <div class="dg-form-group">
+                                <label>Last Name *</label>
+                                <input type="text" name="last_name" required="required" placeholder="Smith"/>
+                            </div>
+                        </div>
+                        <div class="dg-form-group">
+                            <label>Company *</label>
+                            <input type="text" name="company" required="required" placeholder="Your Company Ltd"/>
+                        </div>
+                        <div class="dg-form-row">
+                            <div class="dg-form-group">
+                                <label>Email *</label>
+                                <input type="email" name="email" required="required" placeholder="john@company.com"/>
+                            </div>
+                            <div class="dg-form-group">
+                                <label>Phone</label>
+                                <input type="tel" name="phone" placeholder="+44 161 ..."/>
+                            </div>
+                        </div>
+                        <div class="dg-form-group">
+                            <label>Message</label>
+                            <textarea name="message" rows="5" placeholder="Tell us about your component requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="dg-btn dg-btn-fire" style="width:100%;justify-content:center">Send Enquiry</button>
+                    </form>
+
+                    <div>
+                        <div class="dg-info-item">
+                            <div class="dg-info-icon">📍</div>
+                            <div>
+                                <div class="dg-info-label">Address</div>
+                                <div class="dg-info-value">Dean Group International Ltd<br/>Brinell Drive, Northbank Industrial Park<br/>Irlam, Manchester M44 5BL</div>
+                            </div>
+                        </div>
+                        <div class="dg-info-item">
+                            <div class="dg-info-icon">📞</div>
+                            <div>
+                                <div class="dg-info-label">Phone</div>
+                                <div class="dg-info-value"><a href="tel:01617751633">0161 775 1633</a></div>
+                            </div>
+                        </div>
+                        <div class="dg-info-item">
+                            <div class="dg-info-icon">✉️</div>
+                            <div>
+                                <div class="dg-info-label">Email</div>
+                                <div class="dg-info-value"><a href="mailto:sales@deangroup-int.co.uk">sales@deangroup-int.co.uk</a></div>
+                            </div>
+                        </div>
+                        <div class="dg-info-item">
+                            <div class="dg-info-icon">🕐</div>
+                            <div>
+                                <div class="dg-info-label">Hours</div>
+                                <div class="dg-info-value">Monday–Friday: 08:00–17:30<br/>Saturday–Sunday: Closed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+<!-- ════════════════════════════════════════
+     QUOTE REQUEST PAGE
+════════════════════════════════════════ -->
+<template id="quote_page" name="Dean Group – Get a Quote">
+    <t t-call="website.layout">
+        <section class="dg-section" style="padding-top:7rem">
+            <div class="container" style="max-width:720px">
+                <div class="dg-label">Request a Quote</div>
+                <h1 class="dg-heading">Get a Casting Quote</h1>
+                <p class="dg-sub">Tell us about your component and we'll recommend the right process and provide a competitive quotation.</p>
+                <form action="/get-quote/submit" method="post" style="margin-top:2rem">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="dg-form-row">
+                        <div class="dg-form-group">
+                            <label>Your Name *</label>
+                            <input type="text" name="name" required="required"/>
+                        </div>
+                        <div class="dg-form-group">
+                            <label>Company *</label>
+                            <input type="text" name="company" required="required"/>
+                        </div>
+                    </div>
+                    <div class="dg-form-row">
+                        <div class="dg-form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required="required"/>
+                        </div>
+                        <div class="dg-form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone"/>
+                        </div>
+                    </div>
+                    <div class="dg-form-group">
+                        <label>Process Required</label>
+                        <select name="process_id">
+                            <option value="">-- Not Sure, Please Advise --</option>
+                            <t t-foreach="processes" t-as="p">
+                                <option t-att-value="p.id"><t t-esc="p.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="dg-form-row">
+                        <div class="dg-form-group">
+                            <label>Material / Alloy</label>
+                            <input type="text" name="material" placeholder="e.g. 316L Stainless, ADC12 Aluminium"/>
+                        </div>
+                        <div class="dg-form-group">
+                            <label>Annual Quantity (est.)</label>
+                            <input type="number" name="quantity" placeholder="e.g. 5000"/>
+                        </div>
+                    </div>
+                    <div class="dg-form-group">
+                        <label>Component Description / Requirements</label>
+                        <textarea name="details" rows="5" placeholder="Please describe the component, application, tolerances, surface finish, and any certifications required. Attach drawings or CAD files by email after submitting."></textarea>
+                    </div>
+                    <button type="submit" class="dg-btn dg-btn-fire" style="width:100%;justify-content:center;font-size:1rem;padding:1rem">
+                        Submit Quote Request
+                    </button>
+                    <p style="text-align:center;margin-top:1rem;font-size:.78rem;color:var(--dg-steel)">
+                        We respond within one business day. For urgent enquiries call <a href="tel:01617751633" style="color:var(--dg-ember)">0161 775 1633</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+    </t>
+</template>
+
+</odoo>

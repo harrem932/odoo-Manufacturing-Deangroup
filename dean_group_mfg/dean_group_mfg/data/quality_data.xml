@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ══════════════════════════════════════════
+     QUALITY INSPECTIONS — 20 records
+══════════════════════════════════════════ -->
+<record id="qi_001" model="dg.quality.inspection">
+    <field name="name">QI/2026/0001</field><field name="inspection_date">2026-01-08</field>
+    <field name="inspection_type">final</field><field name="partner_id" ref="cust_rolls_royce"/>
+    <field name="dimensional_result">pass</field><field name="visual_result">pass</field>
+    <field name="chemical_result">pass</field><field name="ndt_required" eval="True"/>
+    <field name="ndt_method">xray</field><field name="ndt_result">pass</field>
+    <field name="overall_result">pass</field><field name="qty_inspected">50</field>
+    <field name="qty_rejected">0</field><field name="certificate_issued" eval="True"/>
+    <field name="cert_language">en</field><field name="inspector_id" ref="emp_sarah_mcallister"/>
+    <field name="notes">All 50 turbine blade investment castings passed. X-ray clear. Certificates dispatched.</field>
+</record>
+<record id="qi_002" model="dg.quality.inspection">
+    <field name="name">QI/2026/0002</field><field name="inspection_date">2026-01-15</field>
+    <field name="inspection_type">final</field><field name="partner_id" ref="cust_bae"/>
+    <field name="dimensional_result">pass</field><field name="visual_result">fail</field>
+    <field name="chemical_result">pass</field><field name="ndt_required" eval="True"/>
+    <field name="ndt_method">pt</field><field name="ndt_result">pass</field>
+    <field name="overall_result">fail</field><field name="qty_inspected">100</field>
+    <field name="qty_rejected">3</field><field name="certificate_issued" eval="False"/>
+    <field name="cert_language">en</field><field name="inspector_id" ref="emp_lucy_barlow"/>
+    <field name="notes">3 parts rejected – surface porosity. Rework authorised. Re-inspected 2026-01-17.</field>
+</record>
+<record id="qi_003" model="dg.quality.inspection">
+    <field name="name">QI/2026/0003</field><field name="inspection_date">2026-01-22</field>
+    <field name="inspection_type">ppap</field><field name="partner_id" ref="cust_siemens_energy"/>
+    <field name="dimensional_result">pass</field><field name="visual_result">pass</field>
+    <field name="chemical_result">pass</field><field name="ndt_required" eval="True"/>
+    <field name="ndt_method">xray</field><field name="ndt_result">pass</field>
+    <field name="overall_result">pass</field><field name="qty_inspected">10</field>
+    <field name="qty_rejected">0</field><field name="certificate_issued" eval="True"/>
+    <field name="cert_language">de</field><field name="inspector_id" ref="emp_kate_birch"/>
+    <field name="notes">PPAP Level 3. First articles for NGV programme. Full report submitted in German.</field>
+</record>
+<record id="qi_004" model="dg.quality.inspection">
+    <field name="name">QI/2026/0004</field><field name="inspection_date">2026-02-05</field>
+    <field name="inspection_type">incoming</field><field name="partner_id" ref="vend_ningbo"/>
+    <field name="dimensional_result">pass</field><field name="visual_result">pass</field>
+    <field name="chemical_result">pass</field><field name="ndt_required" eval="False"/>
+    <field name="overall_result">pass</field><field name="qty_inspected">500</field>
+    <field name="qty_rejected">12</field><field name="certificate_issued" eval="False"/>
+    <field name="inspector_id" ref="emp_lucy_barlow"/>
+    <field name="notes">Incoming China batch. 12 parts with dimensional deviation &gt;0.3mm rejected. Rest released.</field>
+</record>
+<record id="qi_005" model="dg.quality.inspection">
+    <field name="name">QI/2026/0005</field><field name="inspection_date">2026-02-18</field>
+    <field name="inspection_type">final</field><field name="partner_id" ref="cust_stryker"/>
+    <field name="dimensional_result">pass</field><field name="visual_result">pass</field>
+    <field name="chemical_result">pass</field><field name="ndt_required" eval="False"/>
+    <field name="overall_result">pass</field><field name="qty_inspected">200</field>
+    <field name="qty_rejected">0</field><field name="certificate_issued" eval="True"/>
+    <field name="cert_language">en</field><field name="inspector_id" ref="emp_sarah_mcallister"/>
+    <field name="notes">Surgical MIM handles – all 200 passed. Material cert 17-4PH H900 included. ISO 13485.</field>
+</record>
+<record id="qi_006" model="dg.quality.inspection">
+    <field name="name">QI/2026/0006</field><field name="inspection_date">2026-02-25</field>
+    <field name="inspection_type">inprocess</field><field name="overall_result">hold</field>
+    <field name="qty_inspected">80</field><field name="qty_rejected">5</field>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+    <field name="notes">Shell cracking detected in wax room. Process review initiated.</field>
+</record>
+<record id="qi_007" model="dg.quality.inspection">
+    <field name="name">QI/2026/0007</field><field name="inspection_date">2026-03-04</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">350</field><field name="qty_rejected">2</field>
+    <field name="cert_language">zh</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_lucy_barlow"/>
+    <field name="notes">China supply QC pass. Certificate in Chinese for export compliance.</field>
+</record>
+<record id="qi_008" model="dg.quality.inspection">
+    <field name="name">QI/2026/0008</field><field name="inspection_date">2026-03-10</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">25</field><field name="qty_rejected">0</field>
+    <field name="cert_language">en</field><field name="certificate_issued" eval="True"/>
+    <field name="ndt_required" eval="True"/><field name="ndt_method">ut</field>
+    <field name="ndt_result">pass</field><field name="inspector_id" ref="emp_sarah_mcallister"/>
+</record>
+<record id="qi_009" model="dg.quality.inspection">
+    <field name="name">QI/2026/0009</field><field name="inspection_date">2026-03-18</field>
+    <field name="inspection_type">ppap</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">15</field><field name="qty_rejected">0</field>
+    <field name="cert_language">fr</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+    <field name="notes">PPAP for French aerospace customer. Certificate en français.</field>
+</record>
+<record id="qi_010" model="dg.quality.inspection">
+    <field name="name">QI/2026/0010</field><field name="inspection_date">2026-03-25</field>
+    <field name="inspection_type">incoming</field><field name="overall_result">fail</field>
+    <field name="qty_inspected">1000</field><field name="qty_rejected">48</field>
+    <field name="inspector_id" ref="emp_lucy_barlow"/>
+    <field name="notes">High rejection rate on Tianjin batch. Supplier notified. 8-D report requested.</field>
+</record>
+<record id="qi_011" model="dg.quality.inspection">
+    <field name="name">QI/2026/0011</field><field name="inspection_date">2026-04-01</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">60</field><field name="qty_rejected">1</field>
+    <field name="inspector_id" ref="emp_sarah_mcallister"/>
+</record>
+<record id="qi_012" model="dg.quality.inspection">
+    <field name="name">QI/2026/0012</field><field name="inspection_date">2026-04-03</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">120</field><field name="qty_rejected">0</field>
+    <field name="cert_language">ar</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+    <field name="notes">Middle East oil &amp; gas customer. Certificate in Arabic for customs clearance.</field>
+</record>
+<record id="qi_013" model="dg.quality.inspection">
+    <field name="name">QI/2026/0013</field><field name="inspection_date">2026-04-07</field>
+    <field name="inspection_type">final</field><field name="overall_result">scrap</field>
+    <field name="qty_inspected">20</field><field name="qty_rejected">20</field>
+    <field name="inspector_id" ref="emp_sarah_mcallister"/>
+    <field name="notes">Full batch scrapped – incorrect alloy poured. NCR raised. Root cause analysis in progress.</field>
+</record>
+<record id="qi_014" model="dg.quality.inspection">
+    <field name="name">QI/2026/0014</field><field name="inspection_date">2026-04-08</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">75</field><field name="qty_rejected">2</field>
+    <field name="cert_language">en</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+</record>
+<record id="qi_015" model="dg.quality.inspection">
+    <field name="name">QI/2026/0015</field><field name="inspection_date">2026-04-09</field>
+    <field name="inspection_type">incoming</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">800</field><field name="qty_rejected">6</field>
+    <field name="inspector_id" ref="emp_lucy_barlow"/>
+</record>
+<record id="qi_016" model="dg.quality.inspection">
+    <field name="name">QI/2026/0016</field><field name="inspection_date">2026-04-09</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">30</field><field name="qty_rejected">0</field>
+    <field name="cert_language">de</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_sarah_mcallister"/>
+</record>
+<record id="qi_017" model="dg.quality.inspection">
+    <field name="name">QI/2026/0017</field><field name="inspection_date">2026-04-10</field>
+    <field name="inspection_type">ppap</field><field name="overall_result">hold</field>
+    <field name="qty_inspected">5</field><field name="qty_rejected">1</field>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+    <field name="notes">PPAP on hold – first article failed dimensional on critical bore. Tooling adjustment required.</field>
+</record>
+<record id="qi_018" model="dg.quality.inspection">
+    <field name="name">QI/2026/0018</field><field name="inspection_date">2026-04-10</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">200</field><field name="qty_rejected">0</field>
+    <field name="cert_language">en</field><field name="certificate_issued" eval="True"/>
+    <field name="ndt_required" eval="True"/><field name="ndt_method">mt</field>
+    <field name="ndt_result">pass</field><field name="inspector_id" ref="emp_sarah_mcallister"/>
+    <field name="notes">Rail bogie castings – all passed MT inspection. Ready for Alstom shipment.</field>
+</record>
+<record id="qi_019" model="dg.quality.inspection">
+    <field name="name">QI/2026/0019</field><field name="inspection_date">2026-04-11</field>
+    <field name="inspection_type">inprocess</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">150</field><field name="qty_rejected">3</field>
+    <field name="inspector_id" ref="emp_lucy_barlow"/>
+</record>
+<record id="qi_020" model="dg.quality.inspection">
+    <field name="name">QI/2026/0020</field><field name="inspection_date">2026-04-12</field>
+    <field name="inspection_type">final</field><field name="overall_result">pass</field>
+    <field name="qty_inspected">40</field><field name="qty_rejected">0</field>
+    <field name="cert_language">en</field><field name="certificate_issued" eval="True"/>
+    <field name="inspector_id" ref="emp_kate_birch"/>
+</record>
+
+<!-- ══════════════════════════════════════════
+     CRM LEADS — 20 records
+══════════════════════════════════════════ -->
+<record id="lead_001" model="crm.lead">
+    <field name="name">Investment Castings – Valve Bodies – North Sea</field>
+    <field name="partner_id" ref="cust_bp"/>
+    <field name="contact_name">Ian Morrison</field>
+    <field name="email_from">i.morrison@bp.com</field>
+    <field name="expected_revenue">85000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">2</field>
+    <field name="description">BP require 304SS investment cast valve bodies for subsea applications. Annual volume ~800 units. PPAP required.</field>
+</record>
+<record id="lead_002" model="crm.lead">
+    <field name="name">Aerospace Bracket Castings – Landing Gear</field>
+    <field name="partner_id" ref="cust_airbus"/>
+    <field name="contact_name">Sophie Laurent</field>
+    <field name="email_from">s.laurent@airbus.com</field>
+    <field name="expected_revenue">240000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_003" model="crm.lead">
+    <field name="name">Surgical Instrument Handles – MIM Process</field>
+    <field name="partner_id" ref="cust_stryker"/>
+    <field name="contact_name">Mark Ellis</field>
+    <field name="email_from">m.ellis@stryker.com</field>
+    <field name="expected_revenue">120000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_004" model="crm.lead">
+    <field name="name">Wind Turbine Pitch System Castings</field>
+    <field name="partner_id" ref="cust_vestas"/>
+    <field name="contact_name">Lars Andersen</field>
+    <field name="email_from">l.andersen@vestas.com</field>
+    <field name="expected_revenue">180000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_005" model="crm.lead">
+    <field name="name">Railway Bogie Components – Aluminium Die Cast</field>
+    <field name="partner_id" ref="cust_alstom"/>
+    <field name="contact_name">Jean-Pierre Moreau</field>
+    <field name="email_from">jp.moreau@alstom.com</field>
+    <field name="expected_revenue">95000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_006" model="crm.lead">
+    <field name="name">Defence Trigger Mechanism – Investment Casting</field>
+    <field name="partner_id" ref="cust_bae"/>
+    <field name="contact_name">Col. Peter Walsh</field>
+    <field name="email_from">p.walsh@baesystems.com</field>
+    <field name="expected_revenue">310000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_007" model="crm.lead">
+    <field name="name">Gas Turbine Nozzle Guide Vanes – IN713</field>
+    <field name="partner_id" ref="cust_siemens_energy"/>
+    <field name="contact_name">Dr Heike Schmidt</field>
+    <field name="email_from">h.schmidt@siemens-energy.com</field>
+    <field name="expected_revenue">420000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_008" model="crm.lead">
+    <field name="name">MRI Scanner Bracket – Non-Magnetic 316L</field>
+    <field name="partner_id" ref="cust_smiths_med"/>
+    <field name="contact_name">Rachel Green</field>
+    <field name="email_from">r.green@smithsmedical.com</field>
+    <field name="expected_revenue">67000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">0</field>
+</record>
+<record id="lead_009" model="crm.lead">
+    <field name="name">Subsea Manifold Connectors – Forged F316L</field>
+    <field name="partner_id" ref="cust_wood_group"/>
+    <field name="contact_name">Hamish MacLeod</field>
+    <field name="email_from">h.macleod@woodgroup.com</field>
+    <field name="expected_revenue">155000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_010" model="crm.lead">
+    <field name="name">EV Motor Housing – Aluminium ELITE</field>
+    <field name="partner_id" ref="cust_mpac"/>
+    <field name="contact_name">Fiona Smith</field>
+    <field name="email_from">f.smith@mpac-group.com</field>
+    <field name="expected_revenue">58000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">0</field>
+</record>
+<record id="lead_011" model="crm.lead">
+    <field name="name">Pump Impellers – Duplex Stainless</field>
+    <field name="partner_id" ref="cust_weir"/>
+    <field name="contact_name">Stuart Reid</field>
+    <field name="email_from">s.reid@weir.co.uk</field>
+    <field name="expected_revenue">92000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_012" model="crm.lead">
+    <field name="name">Network Rail Track Component – Ductile Iron</field>
+    <field name="partner_id" ref="cust_network_rail"/>
+    <field name="contact_name">Sarah Hughes</field>
+    <field name="email_from">s.hughes@networkrail.co.uk</field>
+    <field name="expected_revenue">78000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">0</field>
+</record>
+<record id="lead_013" model="crm.lead">
+    <field name="name">Avionics Housing – High Temp Alloy</field>
+    <field name="partner_id" ref="cust_thales"/>
+    <field name="contact_name">Michael Blanc</field>
+    <field name="email_from">m.blanc@thalesgroup.com</field>
+    <field name="expected_revenue">145000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_014" model="crm.lead">
+    <field name="name">Jet Engine Bracket – Titanium Investment Cast</field>
+    <field name="partner_id" ref="cust_ge_aviation"/>
+    <field name="contact_name">David Park</field>
+    <field name="email_from">d.park@geaviation.co.uk</field>
+    <field name="expected_revenue">380000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_015" model="crm.lead">
+    <field name="name">Pressure Vessel Components – Petrofac FPSO</field>
+    <field name="partner_id" ref="cust_petrofac"/>
+    <field name="contact_name">Ahmed Khalid</field>
+    <field name="email_from">a.khalid@petrofac.com</field>
+    <field name="expected_revenue">210000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">2</field>
+</record>
+<record id="lead_016" model="crm.lead">
+    <field name="name">Surgical Implant Components – Cobalt Chrome MIM</field>
+    <field name="partner_id" ref="cust_dstl"/>
+    <field name="contact_name">Dr Claire Watson</field>
+    <field name="email_from">c.watson@dstl.gov.uk</field>
+    <field name="expected_revenue">55000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_017" model="crm.lead">
+    <field name="name">Architecture Facade Castings – Aluminium</field>
+    <field name="partner_id" ref="cust_castings_direct"/>
+    <field name="contact_name">James Porter</field>
+    <field name="email_from">j.porter@castingsdirect.co.uk</field>
+    <field name="expected_revenue">42000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">0</field>
+</record>
+<record id="lead_018" model="crm.lead">
+    <field name="name">Radar Component Housing – Defence</field>
+    <field name="partner_id" ref="cust_ultra"/>
+    <field name="contact_name">Neil Cooper</field>
+    <field name="email_from">n.cooper@ultra-electronics.com</field>
+    <field name="expected_revenue">175000</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="priority">1</field>
+</record>
+<record id="lead_019" model="crm.lead">
+    <field name="name">High Speed Train Door Mechanism – Casting</field>
+    <field name="partner_id" ref="cust_alstom"/>
+    <field name="contact_name">Isabelle Fontaine</field>
+    <field name="email_from">i.fontaine@alstom.com</field>
+    <field name="expected_revenue">88000</field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="priority">0</field>
+</record>
+<record id="lead_020" model="crm.lead">
+    <field name="name">Offshore Valve Actuator – Inconel Casting</field>
+    <field name="partner_id" ref="cust_bp"/>
+    <field name="contact_name">Fiona MacKay</field>
+    <field name="email_from">f.mackay@bp.com</field>
+    <field name="expected_revenue">320000</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="priority">2</field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     JOB POSITIONS — 6 live vacancies
+══════════════════════════════════════════ -->
+<record id="job_process_engineer" model="hr.job">
+    <field name="name">Foundry Process Engineer</field>
+    <field name="no_of_recruitment">1</field>
+    <field name="description">Develop and optimise casting processes across our investment casting and die casting lines. BEng Metallurgy/Materials preferred.</field>
+</record>
+<record id="job_quality_inspector" model="hr.job">
+    <field name="name">Quality Inspector – CMM</field>
+    <field name="no_of_recruitment">2</field>
+    <field name="description">Visual, dimensional and chemical inspection. CMM experience. ISO 9001:2015 environment.</field>
+</record>
+<record id="job_apprentice" model="hr.job">
+    <field name="name">Foundry Apprentice – Investment Casting</field>
+    <field name="no_of_recruitment">2</field>
+    <field name="description">NVQ Level 2/3 in foundry operations. Earn while you learn. Real hands-on experience from day one.</field>
+</record>
+<record id="job_sales_engineer" model="hr.job">
+    <field name="name">Technical Sales Engineer</field>
+    <field name="no_of_recruitment">1</field>
+    <field name="description">New business in aerospace, defence and oil &amp; gas. Technical metals background preferred. Competitive + commission.</field>
+</record>
+<record id="job_cnc_machinist" model="hr.job">
+    <field name="name">CNC Machinist – Fanuc / Haas</field>
+    <field name="no_of_recruitment">1</field>
+    <field name="description">Setup and operate CNC turning and milling centres. 3-axis and 4-axis experience required.</field>
+</record>
+<record id="job_maintenance_eng" model="hr.job">
+    <field name="name">Maintenance Engineer – Foundry Plant</field>
+    <field name="no_of_recruitment">1</field>
+    <field name="description">PPM and reactive maintenance on induction furnaces, shot blast and CNC machines.</field>
+</record>
+</odoo>

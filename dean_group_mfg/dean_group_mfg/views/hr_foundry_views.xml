@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══ HR FOUNDRY EMPLOYEE EXTENSION ══ -->
+<record id="view_hr_employee_foundry_form" model="ir.ui.view">
+    <field name="name">hr.employee.foundry.form</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+        <page name="resume" position="after">
+            <page name="foundry" string="Foundry Details">
+                <group>
+                    <group string="Role &amp; Skills">
+                        <field name="employee_type"/>
+                        <field name="foundry_skill"/>
+                        <field name="shift"/>
+                        <field name="site"/>
+                        <field name="nvq_level"/>
+                    </group>
+                    <group string="Compliance">
+                        <field name="ppe_certified"/>
+                        <field name="health_surveillance"/>
+                    </group>
+                </group>
+                <group string="Apprenticeship" invisible="employee_type != 'apprentice'">
+                    <field name="apprenticeship_start"/>
+                    <field name="apprenticeship_end"/>
+                </group>
+            </page>
+        </page>
+    </field>
+</record>
+
+<!-- Foundry employee list view -->
+<record id="view_hr_employee_foundry_list" model="ir.ui.view">
+    <field name="name">hr.employee.foundry.list</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_tree"/>
+    <field name="arch" type="xml">
+        <field name="job_id" position="after">
+            <field name="foundry_skill" optional="show"/>
+            <field name="shift" optional="show"/>
+            <field name="site" optional="show"/>
+            <field name="employee_type" optional="show"/>
+            <field name="nvq_level" optional="hide"/>
+            <field name="ppe_certified" optional="show" widget="boolean_toggle"/>
+        </field>
+    </field>
+</record>
+
+<record id="action_foundry_employees" model="ir.actions.act_window">
+    <field name="name">Foundry Employees</field>
+    <field name="res_model">hr.employee</field>
+    <field name="view_mode">list,kanban,form</field>
+    <field name="context">{'default_site': 'manchester'}</field>
+</record>
+
+<record id="action_apprentices" model="ir.actions.act_window">
+    <field name="name">Apprentices</field>
+    <field name="res_model">hr.employee</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('employee_type','=','apprentice')]</field>
+</record>
+
+</odoo>

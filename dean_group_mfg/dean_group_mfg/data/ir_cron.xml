@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     SCHEDULED ACTIONS (CRON JOBS)
+     Dean Group International – Odoo Automation
+══════════════════════════════════════════ -->
+
+<!-- 1. Daily: Alert on China orders with ETA within 7 days -->
+<record id="cron_china_eta_alert" model="ir.cron">
+    <field name="name">DG: China ETA Alert (Daily)</field>
+    <field name="model_id" ref="model_dg_china_supply"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date, timedelta
+alert_date = date.today() + timedelta(days=7)
+orders = env['dg.china.supply'].search([
+    ('state', 'in', ['in_transit', 'customs']),
+    ('eta_date', '<=', str(alert_date)),
+    ('eta_date', '>=', str(date.today())),
+])
+for order in orders:
+    order.message_post(
+        body=f"⚠️ ETA Alert: This China supply order is due to arrive within 7 days ({order.eta_date}). Ensure inspection team is ready.",
+        message_type='notification',
+        subtype_xmlid='mail.mt_note',
+    )
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 2. Daily: Flag quality inspections with no cert after 24hrs of PASS -->
+<record id="cron_pending_certs_alert" model="ir.cron">
+    <field name="name">DG: Pending Certificate Alert (Daily)</field>
+    <field name="model_id" ref="model_dg_quality_inspection"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date, timedelta
+cutoff = date.today() - timedelta(days=1)
+pending = env['dg.quality.inspection'].search([
+    ('overall_result', '=', 'pass'),
+    ('certificate_issued', '=', False),
+    ('inspection_date', '<=', str(cutoff)),
+])
+if pending:
+    count = len(pending)
+    refs = ', '.join(pending.mapped('name')[:5])
+    env['mail.message'].create({
+        'body': f"📋 {count} quality inspection(s) are PASS but have no Certificate of Conformity issued: {refs}{'...' if count > 5 else ''}",
+        'message_type': 'notification',
+        'model': 'dg.quality.inspection',
+        'subtype_id': env.ref('mail.mt_note').id,
+    })
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 3. Weekly: PPM overdue check for all foundry equipment -->
+<record id="cron_ppm_overdue_check" model="ir.cron">
+    <field name="name">DG: PPM Overdue Check (Weekly)</field>
+    <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date
+overdue = env['maintenance.equipment'].search([
+    ('ppm_overdue', '=', True),
+    ('active', '=', True),
+])
+for equip in overdue:
+    template = env.ref('dean_group_mfg.mail_template_ppm_overdue', raise_if_not_found=False)
+    if template:
+        template.send_mail(equip.id, force_send=True)
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">weeks</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 4. Weekly: Apprentice health surveillance reminder check -->
+<record id="cron_health_surveillance_check" model="ir.cron">
+    <field name="name">DG: Health Surveillance Reminder (Weekly)</field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date, timedelta
+due_soon = date.today() + timedelta(days=30)
+employees = env['hr.employee'].search([
+    ('health_surveillance', '<=', str(due_soon)),
+    ('health_surveillance', '>=', str(date.today())),
+    ('active', '=', True),
+])
+for emp in employees:
+    emp.message_post(
+        body=f"🏥 Health Surveillance Due: {emp.name}'s health surveillance is due on {emp.health_surveillance}. Please schedule appointment.",
+        message_type='notification',
+        subtype_xmlid='mail.mt_note',
+    )
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">weeks</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 5. Monthly: LOLER inspection due check -->
+<record id="cron_loler_check" model="ir.cron">
+    <field name="name">DG: LOLER Certificate Expiry Check (Monthly)</field>
+    <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date, timedelta
+due_soon = date.today() + timedelta(days=60)
+due = env['maintenance.equipment'].search([
+    ('loler_required', '=', True),
+    ('loler_next_due', '<=', str(due_soon)),
+    ('active', '=', True),
+])
+for equip in due:
+    equip.message_post(
+        body=f"🏗️ LOLER Alert: {equip.name} LOLER inspection due {equip.loler_next_due}. Book with certified inspector.",
+        message_type='notification',
+        subtype_xmlid='mail.mt_note',
+    )
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">months</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 6. Daily: Quality hold notification for manufacturing orders -->
+<record id="cron_quality_hold_alert" model="ir.cron">
+    <field name="name">DG: Quality Hold Manufacturing Orders (Daily)</field>
+    <field name="model_id" ref="mrp.model_mrp_production"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+held = env['mrp.production'].search([
+    ('quality_hold', '=', True),
+    ('state', 'not in', ['done', 'cancel']),
+])
+for mo in held:
+    mo.message_post(
+        body=f"⚠️ Reminder: Manufacturing order {mo.name} is on Quality Hold. Reason: {mo.quality_hold_reason or 'Not specified'}",
+        message_type='notification',
+        subtype_xmlid='mail.mt_note',
+    )
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+<!-- 7. Weekly: Calibration due check for quality equipment -->
+<record id="cron_calibration_check" model="ir.cron">
+    <field name="name">DG: Calibration Due Check (Weekly)</field>
+    <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+    <field name="state">code</field>
+    <field name="code"><![CDATA[
+from datetime import date, timedelta
+due_soon = date.today() + timedelta(days=30)
+due = env['maintenance.equipment'].search([
+    ('calibration_required', '=', True),
+    ('calibration_due', '<=', str(due_soon)),
+    ('active', '=', True),
+])
+for equip in due:
+    equip.message_post(
+        body=f"📏 Calibration Due: {equip.name} calibration due {equip.calibration_due}. Cert Ref: {equip.calibration_cert_ref or 'N/A'}. Book with calibration provider.",
+        message_type='notification',
+        subtype_xmlid='mail.mt_note',
+    )
+    ]]></field>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">weeks</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True"/>
+    <field name="priority">5</field>
+</record>
+
+</odoo>

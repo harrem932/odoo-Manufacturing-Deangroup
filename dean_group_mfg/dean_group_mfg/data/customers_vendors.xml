@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ══════════════════════════════════════════
+     EMPLOYEES — 20 records
+══════════════════════════════════════════ -->
+<record id="emp_carol_dean" model="hr.employee">
+    <field name="name">Carol Dean</field><field name="job_title">Managing Director</field>
+    <field name="work_email">carol.dean@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">management</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">5</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_chris_dean" model="hr.employee">
+    <field name="name">Chris Dean</field><field name="job_title">Operations Director</field>
+    <field name="work_email">chris.dean@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">management</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">5</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_james_whitfield" model="hr.employee">
+    <field name="name">James Whitfield</field><field name="job_title">Senior Process Engineer</field>
+    <field name="work_email">j.whitfield@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">engineering</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">5</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_sarah_mcallister" model="hr.employee">
+    <field name="name">Sarah McAllister</field><field name="job_title">Quality Manager</field>
+    <field name="work_email">s.mcallister@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">quality</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">4</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_ahmed_hussain" model="hr.employee">
+    <field name="name">Ahmed Hussain</field><field name="job_title">CNC Machinist – Senior</field>
+    <field name="work_email">a.hussain@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">machinist</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">3</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_dave_riley" model="hr.employee">
+    <field name="name">Dave Riley</field><field name="job_title">Shell Room Operative</field>
+    <field name="work_email">d.riley@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">shell</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">2</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_lucy_barlow" model="hr.employee">
+    <field name="name">Lucy Barlow</field><field name="job_title">Quality Inspector</field>
+    <field name="work_email">l.barlow@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">quality</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">3</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_tom_ford" model="hr.employee">
+    <field name="name">Tom Ford</field><field name="job_title">Maintenance Engineer</field>
+    <field name="work_email">t.ford@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">maintenance</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">4</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_priya_patel" model="hr.employee">
+    <field name="name">Priya Patel</field><field name="job_title">Technical Sales Engineer</field>
+    <field name="work_email">p.patel@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">sales</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">5</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_jack_oconnor" model="hr.employee">
+    <field name="name">Jack O'Connor</field><field name="job_title">Foundry Apprentice – Yr 2</field>
+    <field name="work_email">j.oconnor@deangroup-int.co.uk</field>
+    <field name="employee_type">apprentice</field><field name="foundry_skill">casting</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">2</field>
+    <field name="ppe_certified" eval="True"/>
+    <field name="apprenticeship_start">2023-09-01</field>
+    <field name="apprenticeship_end">2026-08-31</field>
+</record>
+<record id="emp_emma_dean" model="hr.employee">
+    <field name="name">Emma Dean</field><field name="job_title">Foundry Apprentice – Yr 1</field>
+    <field name="work_email">e.dean@deangroup-int.co.uk</field>
+    <field name="employee_type">apprentice</field><field name="foundry_skill">casting</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">1</field>
+    <field name="ppe_certified" eval="True"/>
+    <field name="apprenticeship_start">2024-09-01</field>
+    <field name="apprenticeship_end">2027-08-31</field>
+</record>
+<record id="emp_mike_chen" model="hr.employee">
+    <field name="name">Mike Chen</field><field name="job_title">China Supply Coordinator</field>
+    <field name="work_email">m.chen@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">admin</field>
+    <field name="shift">office</field><field name="site">china</field><field name="nvq_level">5</field>
+</record>
+<record id="emp_gary_shaw" model="hr.employee">
+    <field name="name">Gary Shaw</field><field name="job_title">Wax Room Operative</field>
+    <field name="work_email">g.shaw@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">wax</field>
+    <field name="shift">late</field><field name="site">manchester</field><field name="nvq_level">2</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_yasmin_ali" model="hr.employee">
+    <field name="name">Yasmin Ali</field><field name="job_title">Finance &amp; HR Administrator</field>
+    <field name="work_email">y.ali@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">admin</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">4</field>
+</record>
+<record id="emp_rob_hurst" model="hr.employee">
+    <field name="name">Rob Hurst</field><field name="job_title">Casting Operative – Senior</field>
+    <field name="work_email">r.hurst@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">casting</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">3</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_nadia_costa" model="hr.employee">
+    <field name="name">Nadia Costa</field><field name="job_title">Process Engineer – Aluminium</field>
+    <field name="work_email">n.costa@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">engineering</field>
+    <field name="shift">office</field><field name="site">manchester</field><field name="nvq_level">5</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_kate_birch" model="hr.employee">
+    <field name="name">Kate Birch</field><field name="job_title">Quality Inspector – CMM</field>
+    <field name="work_email">k.birch@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">quality</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">4</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_dan_ogilvie" model="hr.employee">
+    <field name="name">Dan Ogilvie</field><field name="job_title">Casting Operative – Late Shift</field>
+    <field name="work_email">d.ogilvie@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">casting</field>
+    <field name="shift">late</field><field name="site">manchester</field><field name="nvq_level">2</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_len_thompson" model="hr.employee">
+    <field name="name">Len Thompson</field><field name="job_title">Despatch &amp; Warehouse Supervisor</field>
+    <field name="work_email">l.thompson@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">admin</field>
+    <field name="shift">day</field><field name="site">manchester</field><field name="nvq_level">3</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+<record id="emp_ali_rahman" model="hr.employee">
+    <field name="name">Ali Rahman</field><field name="job_title">Night Shift Lead – Casting</field>
+    <field name="work_email">a.rahman@deangroup-int.co.uk</field>
+    <field name="employee_type">permanent</field><field name="foundry_skill">casting</field>
+    <field name="shift">night</field><field name="site">manchester</field><field name="nvq_level">3</field>
+    <field name="ppe_certified" eval="True"/>
+</record>
+
+<!-- ══════════════════════════════════════════
+     CUSTOMERS — 20 records
+══════════════════════════════════════════ -->
+<record id="cust_rolls_royce" model="res.partner">
+    <field name="name">Rolls-Royce Holdings plc</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">10</field><field name="city">Derby</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@rolls-royce.com</field>
+    <field name="phone">01332 242424</field>
+</record>
+<record id="cust_bae" model="res.partner">
+    <field name="name">BAE Systems plc</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">8</field><field name="city">Farnborough</field>
+    <field name="country_id" ref="base.uk"/><field name="email">supply.chain@baesystems.com</field>
+</record>
+<record id="cust_smiths_med" model="res.partner">
+    <field name="name">Smiths Medical Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">7</field><field name="city">Ashford</field>
+    <field name="country_id" ref="base.uk"/><field name="email">purchasing@smithsmedical.com</field>
+</record>
+<record id="cust_wood_group" model="res.partner">
+    <field name="name">Wood Group UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">6</field><field name="city">Aberdeen</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@woodgroup.com</field>
+</record>
+<record id="cust_siemens_energy" model="res.partner">
+    <field name="name">Siemens Energy Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">9</field><field name="city">Lincoln</field>
+    <field name="country_id" ref="base.uk"/><field name="email">parts@siemens-energy.com</field>
+</record>
+<record id="cust_alstom" model="res.partner">
+    <field name="name">Alstom Transport UK</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">7</field><field name="city">Birmingham</field>
+    <field name="country_id" ref="base.uk"/><field name="email">suppliers@alstom.com</field>
+</record>
+<record id="cust_ge_aviation" model="res.partner">
+    <field name="name">GE Aviation UK</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">8</field><field name="city">Cheltenham</field>
+    <field name="country_id" ref="base.uk"/><field name="email">supply@geaviation.co.uk</field>
+</record>
+<record id="cust_thales" model="res.partner">
+    <field name="name">Thales UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">6</field><field name="city">Reading</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@thalesgroup.com</field>
+</record>
+<record id="cust_bp" model="res.partner">
+    <field name="name">BP Offshore Europe Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">7</field><field name="city">Aberdeen</field>
+    <field name="country_id" ref="base.uk"/><field name="email">supplier.management@bp.com</field>
+</record>
+<record id="cust_stryker" model="res.partner">
+    <field name="name">Stryker UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">6</field><field name="city">Newbury</field>
+    <field name="country_id" ref="base.uk"/><field name="email">purchasing@stryker.com</field>
+</record>
+<record id="cust_petrofac" model="res.partner">
+    <field name="name">Petrofac Engineering Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">5</field><field name="city">London</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@petrofac.com</field>
+</record>
+<record id="cust_network_rail" model="res.partner">
+    <field name="name">Network Rail Infrastructure Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">6</field><field name="city">London</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@networkrail.co.uk</field>
+</record>
+<record id="cust_airbus" model="res.partner">
+    <field name="name">Airbus Operations Ltd UK</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">9</field><field name="city">Bristol</field>
+    <field name="country_id" ref="base.uk"/><field name="email">supply.chain@airbus.com</field>
+</record>
+<record id="cust_vestas" model="res.partner">
+    <field name="name">Vestas Wind Systems UK</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">5</field><field name="city">Warrington</field>
+    <field name="country_id" ref="base.uk"/><field name="email">supply@vestas.com</field>
+</record>
+<record id="cust_weir" model="res.partner">
+    <field name="name">Weir Group plc</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">7</field><field name="city">Glasgow</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@weir.co.uk</field>
+</record>
+<record id="cust_ultra" model="res.partner">
+    <field name="name">Ultra Electronics Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">5</field><field name="city">London</field>
+    <field name="country_id" ref="base.uk"/><field name="email">procurement@ultra-electronics.com</field>
+</record>
+<record id="cust_turbine_aero" model="res.partner">
+    <field name="name">Turbine Aero Components Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">4</field><field name="city">Sheffield</field>
+    <field name="country_id" ref="base.uk"/><field name="email">buying@turbineaero.co.uk</field>
+</record>
+<record id="cust_mpac" model="res.partner">
+    <field name="name">MPAC Group plc</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">4</field><field name="city">Peterborough</field>
+    <field name="country_id" ref="base.uk"/><field name="email">purchasing@mpac-group.com</field>
+</record>
+<record id="cust_dstl" model="res.partner">
+    <field name="name">DSTL – Defence Science Lab</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">5</field><field name="city">Porton Down</field>
+    <field name="country_id" ref="base.uk"/><field name="email">contracts@dstl.gov.uk</field>
+</record>
+<record id="cust_castings_direct" model="res.partner">
+    <field name="name">Castings Direct Ltd</field><field name="is_company" eval="True"/>
+    <field name="customer_rank">3</field><field name="city">Wolverhampton</field>
+    <field name="country_id" ref="base.uk"/><field name="email">orders@castingsdirect.co.uk</field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     VENDORS — 20 records
+══════════════════════════════════════════ -->
+<record id="vend_ningbo" model="res.partner">
+    <field name="name">Ningbo Precision Casting Co. Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">10</field><field name="city">Ningbo</field>
+    <field name="country_id" ref="base.cn"/><field name="email">export@ningbocasting.com</field>
+</record>
+<record id="vend_shanghai_mim" model="res.partner">
+    <field name="name">Shanghai MIM Technology Co.</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">8</field><field name="city">Shanghai</field>
+    <field name="country_id" ref="base.cn"/><field name="email">sales@shanghaimim.cn</field>
+</record>
+<record id="vend_dongguan" model="res.partner">
+    <field name="name">Dongguan Forging &amp; Machining Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">7</field><field name="city">Dongguan</field>
+    <field name="country_id" ref="base.cn"/><field name="email">inquiry@dgforging.com</field>
+</record>
+<record id="vend_allied_alloys" model="res.partner">
+    <field name="name">Allied Alloys UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">9</field><field name="city">Sheffield</field>
+    <field name="country_id" ref="base.uk"/><field name="email">sales@alliedalloys.co.uk</field>
+</record>
+<record id="vend_blayson" model="res.partner">
+    <field name="name">Blayson Olefines Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">8</field><field name="city">Sittingbourne</field>
+    <field name="country_id" ref="base.uk"/><field name="email">sales@blayson.com</field>
+</record>
+<record id="vend_imerys" model="res.partner">
+    <field name="name">Imerys Refractory Minerals</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">7</field><field name="city">Par, Cornwall</field>
+    <field name="country_id" ref="base.uk"/><field name="email">refractories@imerys.com</field>
+</record>
+<record id="vend_metal_centre" model="res.partner">
+    <field name="name">Metal Centre UK</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">6</field><field name="city">Manchester</field>
+    <field name="country_id" ref="base.uk"/><field name="email">orders@metalcentre.co.uk</field>
+</record>
+<record id="vend_kennametal" model="res.partner">
+    <field name="name">Kennametal UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">8</field><field name="city">Rochester</field>
+    <field name="country_id" ref="base.uk"/><field name="email">uk.sales@kennametal.com</field>
+</record>
+<record id="vend_bodycote" model="res.partner">
+    <field name="name">Bodycote Heat Treatment Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">9</field><field name="city">Macclesfield</field>
+    <field name="country_id" ref="base.uk"/><field name="email">uk@bodycote.com</field>
+</record>
+<record id="vend_mcr_plating" model="res.partner">
+    <field name="name">Manchester Plating Co. Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">6</field><field name="city">Manchester</field>
+    <field name="country_id" ref="base.uk"/><field name="email">info@manchesterplating.co.uk</field>
+</record>
+<record id="vend_agility" model="res.partner">
+    <field name="name">Agility Logistics UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">7</field><field name="city">Heathrow</field>
+    <field name="country_id" ref="base.uk"/><field name="email">uk.freight@agility.com</field>
+</record>
+<record id="vend_renishaw" model="res.partner">
+    <field name="name">Renishaw plc</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">5</field><field name="city">Wotton-under-Edge</field>
+    <field name="country_id" ref="base.uk"/><field name="email">uk.sales@renishaw.com</field>
+</record>
+<record id="vend_bsi" model="res.partner">
+    <field name="name">BSI Group UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">4</field><field name="city">London</field>
+    <field name="country_id" ref="base.uk"/><field name="email">enquiries@bsigroup.com</field>
+</record>
+<record id="vend_inductotherm" model="res.partner">
+    <field name="name">Inductotherm Europe Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">6</field><field name="city">Droitwich</field>
+    <field name="country_id" ref="base.uk"/><field name="email">europe@inductotherm.com</field>
+</record>
+<record id="vend_dssmith" model="res.partner">
+    <field name="name">DS Smith Packaging UK</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">5</field><field name="city">London</field>
+    <field name="country_id" ref="base.uk"/><field name="email">packaging@dssmith.com</field>
+</record>
+<record id="vend_zhuhai" model="res.partner">
+    <field name="name">Zhuhai Investment Casting Factory</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">8</field><field name="city">Zhuhai</field>
+    <field name="country_id" ref="base.cn"/><field name="email">export@zhuhaicasting.cn</field>
+</record>
+<record id="vend_tianjin" model="res.partner">
+    <field name="name">Tianjin Die Casting Technology Co.</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">7</field><field name="city">Tianjin</field>
+    <field name="country_id" ref="base.cn"/><field name="email">sales@tjdiecast.cn</field>
+</record>
+<record id="vend_arrow_chem" model="res.partner">
+    <field name="name">Arrow Chemical Group Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">4</field><field name="city">Warrington</field>
+    <field name="country_id" ref="base.uk"/><field name="email">sales@arrowchemical.co.uk</field>
+</record>
+<record id="vend_safetywork" model="res.partner">
+    <field name="name">SafetyWork UK Ltd</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">5</field><field name="city">Birmingham</field>
+    <field name="country_id" ref="base.uk"/><field name="email">orders@safetywork.co.uk</field>
+</record>
+<record id="vend_hays" model="res.partner">
+    <field name="name">Hays Engineering Recruitment</field><field name="is_company" eval="True"/>
+    <field name="supplier_rank">3</field><field name="city">Manchester</field>
+    <field name="country_id" ref="base.uk"/><field name="email">manchester.engineering@hays.com</field>
+</record>
+</odoo>

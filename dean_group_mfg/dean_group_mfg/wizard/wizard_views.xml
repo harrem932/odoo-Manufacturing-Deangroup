@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     CASTING QUOTE WIZARD
+══════════════════════════════════════════ -->
+<record id="view_casting_quote_wizard_form" model="ir.ui.view">
+    <field name="name">dg.casting.quote.wizard.form</field>
+    <field name="model">dg.casting.quote.wizard</field>
+    <field name="arch" type="xml">
+        <form string="New Casting Enquiry">
+            <sheet>
+                <!-- Step indicator -->
+                <div class="alert alert-info" style="margin-bottom:16px">
+                    <b>Step <field name="step" readonly="1"/> of 3</b>
+                    <span invisible="step != 1"> — Customer &amp; Industry</span>
+                    <span invisible="step != 2"> — Casting Details</span>
+                    <span invisible="step != 3"> — Review &amp; Confirm</span>
+                </div>
+
+                <!-- STEP 1 -->
+                <group invisible="step != 1">
+                    <group string="Customer Details">
+                        <field name="partner_id"/>
+                        <field name="contact_name"/>
+                        <field name="industry"/>
+                    </group>
+                </group>
+
+                <!-- STEP 2 -->
+                <group invisible="step != 2">
+                    <group string="Casting Requirements">
+                        <field name="casting_process_id"/>
+                        <field name="alloy_spec"/>
+                        <field name="quantity_annual"/>
+                        <field name="weight_grams"/>
+                        <field name="drawing_ref"/>
+                        <field name="has_cad"/>
+                    </group>
+                    <group string="Supply &amp; Quality">
+                        <field name="supply_route" widget="radio"/>
+                        <field name="ppap_required"/>
+                    </group>
+                    <group string="Estimated Lead Time" colspan="2">
+                        <field name="lead_time_estimate" readonly="1"/>
+                    </group>
+                    <group string="Notes" colspan="2">
+                        <field name="special_notes" nolabel="1"/>
+                    </group>
+                </group>
+
+                <!-- STEP 3 -->
+                <group invisible="step != 3">
+                    <group string="Review">
+                        <field name="partner_id" readonly="1"/>
+                        <field name="casting_process_id" readonly="1"/>
+                        <field name="alloy_spec" readonly="1"/>
+                        <field name="quantity_annual" readonly="1"/>
+                        <field name="supply_route" readonly="1"/>
+                        <field name="lead_time_estimate" readonly="1"/>
+                    </group>
+                    <group string="Create Records">
+                        <field name="estimated_value"/>
+                        <field name="create_crm_lead"/>
+                        <field name="create_enquiry"/>
+                    </group>
+                </group>
+            </sheet>
+            <footer>
+                <button string="Next →" name="action_next" type="object"
+                        class="btn-primary" invisible="step == 3"/>
+                <button string="← Back" name="action_back" type="object"
+                        invisible="step == 1"/>
+                <button string="Confirm &amp; Create" name="action_confirm"
+                        type="object" class="btn-success" invisible="step != 3"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="action_casting_quote_wizard" model="ir.actions.act_window">
+    <field name="name">New Casting Enquiry</field>
+    <field name="res_model">dg.casting.quote.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     BULK CERTIFICATE WIZARD
+══════════════════════════════════════════ -->
+<record id="view_bulk_cert_wizard_form" model="ir.ui.view">
+    <field name="name">dg.bulk.cert.wizard.form</field>
+    <field name="model">dg.bulk.cert.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Generate Certificates of Conformity">
+            <sheet>
+                <div class="alert alert-info">
+                    Select quality inspections and choose the certificate language.
+                    Only PASS records can have certificates issued.
+                </div>
+                <group>
+                    <field name="cert_language" widget="radio"
+                           options="{'horizontal': true}"/>
+                    <field name="mark_as_issued"/>
+                    <field name="record_count" readonly="1"
+                           string="Selected Records"/>
+                </group>
+                <field name="inspection_ids" widget="many2many_tags"
+                       domain="[('overall_result','=','pass')]"/>
+            </sheet>
+            <footer>
+                <button string="Generate PDFs" name="action_generate"
+                        type="object" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="action_bulk_cert_wizard" model="ir.actions.act_window">
+    <field name="name">Bulk Certificate Generation</field>
+    <field name="res_model">dg.bulk.cert.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+</odoo>

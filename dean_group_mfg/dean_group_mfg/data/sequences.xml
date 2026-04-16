@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequences -->
+    <record id="seq_casting_enquiry" model="ir.sequence">
+        <field name="name">Casting Enquiry</field>
+        <field name="code">dg.casting.enquiry</field>
+        <field name="prefix">DGE/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+    <record id="seq_quality_inspection" model="ir.sequence">
+        <field name="name">Quality Inspection</field>
+        <field name="code">dg.quality.inspection</field>
+        <field name="prefix">QI/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+    <record id="seq_china_supply" model="ir.sequence">
+        <field name="name">China Supply Order</field>
+        <field name="code">dg.china.supply</field>
+        <field name="prefix">CSO/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>

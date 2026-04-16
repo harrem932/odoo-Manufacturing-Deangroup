@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Equipment category -->
+<record id="equip_cat_furnace" model="maintenance.equipment.category">
+    <field name="name">Melting Furnaces</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+</record>
+<record id="equip_cat_casting" model="maintenance.equipment.category">
+    <field name="name">Casting Equipment</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+</record>
+<record id="equip_cat_finishing" model="maintenance.equipment.category">
+    <field name="name">Finishing &amp; Machining</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+</record>
+<record id="equip_cat_quality" model="maintenance.equipment.category">
+    <field name="name">Quality &amp; Metrology</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+</record>
+
+<!-- ══ 20 EQUIPMENT RECORDS ══ -->
+<record id="equip_furnace_1" model="maintenance.equipment">
+    <field name="name">Induction Melting Furnace #1 – 100kg</field>
+    <field name="category_id" ref="equip_cat_furnace"/>
+    <field name="serial_no">IND-MCR-001</field>
+    <field name="model">Inductotherm VIP 100</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Primary investment casting furnace. 100kg capacity. Stainless and carbon steel alloys.</field>
+</record>
+<record id="equip_furnace_2" model="maintenance.equipment">
+    <field name="name">Induction Melting Furnace #2 – 50kg</field>
+    <field name="category_id" ref="equip_cat_furnace"/>
+    <field name="serial_no">IND-MCR-002</field>
+    <field name="model">Inductotherm VIP 50</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Secondary furnace. Aluminium and non-ferrous alloys.</field>
+</record>
+<record id="equip_furnace_aluminium" model="maintenance.equipment">
+    <field name="name">Aluminium ELITE Melting Furnace</field>
+    <field name="category_id" ref="equip_cat_furnace"/>
+    <field name="serial_no">AL-ELITE-001</field>
+    <field name="model">Inductotherm Aluminium 80kg</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Dedicated ELITE process aluminium furnace. ADC12/ADC10 alloys only.</field>
+</record>
+<record id="equip_wax_injector_1" model="maintenance.equipment">
+    <field name="name">Wax Injection Press #1</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">WAX-INJ-001</field>
+    <field name="model">Remet WaxPress 50T</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">90</field>
+    <field name="note">Primary wax injection. 50-tonne clamping. Variable temperature control.</field>
+</record>
+<record id="equip_wax_injector_2" model="maintenance.equipment">
+    <field name="name">Wax Injection Press #2</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">WAX-INJ-002</field>
+    <field name="model">Remet WaxPress 25T</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">90</field>
+    <field name="note">Secondary wax injection. 25-tonne. Small and medium tooling.</field>
+</record>
+<record id="equip_3d_printer" model="maintenance.equipment">
+    <field name="name">ThermoJet 3D Wax Printer</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">TJ3D-MCR-001</field>
+    <field name="model">3D Systems ThermoJet 2000</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">60</field>
+    <field name="note">Rapid wax prototype printing. Layer thickness 0.002–0.003 inches.</field>
+</record>
+<record id="equip_shell_robot" model="maintenance.equipment">
+    <field name="name">Robotic Shell Dipping Line</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">SHELL-ROB-001</field>
+    <field name="model">Custom Robotic 6-Axis</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Automated ceramic shell building. 6-axis robot. 8-layer capability.</field>
+</record>
+<record id="equip_autoclave" model="maintenance.equipment">
+    <field name="name">Autoclave Dewax Unit</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">AUTO-DEW-001</field>
+    <field name="model">Howden Autoclave 1.5m</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Steam autoclave for wax removal. 8-bar operating pressure.</field>
+</record>
+<record id="equip_shot_blast_1" model="maintenance.equipment">
+    <field name="name">Shot Blast Cabinet #1</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">SHOT-001</field>
+    <field name="model">Wheelabrator Tumblast 1200</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">60</field>
+    <field name="note">Post-casting surface cleaning. Steel shot S110/S170.</field>
+</record>
+<record id="equip_shot_blast_2" model="maintenance.equipment">
+    <field name="name">Shot Blast Cabinet #2 – Pressure</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">SHOT-002</field>
+    <field name="model">Clemco Pressure Blast</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">60</field>
+    <field name="note">Pressure blasting for complex geometries and internal passages.</field>
+</record>
+<record id="equip_cnc_lathe_1" model="maintenance.equipment">
+    <field name="name">CNC Turning Centre #1</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">CNC-TURN-001</field>
+    <field name="model">Haas ST-20 CNC Lathe</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">90</field>
+    <field name="note">Haas ST-20. 450mm swing, 508mm between centres. Fanuc control.</field>
+</record>
+<record id="equip_cnc_mill_1" model="maintenance.equipment">
+    <field name="name">CNC Milling Centre #1</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">CNC-MILL-001</field>
+    <field name="model">Haas VF-2 Vertical Mill</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">90</field>
+    <field name="note">3-axis vertical machining centre. 762x406x508mm travel.</field>
+</record>
+<record id="equip_cnc_mill_2" model="maintenance.equipment">
+    <field name="name">CNC Milling Centre #2 – 4-Axis</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">CNC-MILL-002</field>
+    <field name="model">Mazak VCN-530C 4-Axis</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">90</field>
+    <field name="note">4-axis machining for complex post-cast features on turbine and defence components.</field>
+</record>
+<record id="equip_cmm" model="maintenance.equipment">
+    <field name="name">Coordinate Measuring Machine (CMM)</field>
+    <field name="category_id" ref="equip_cat_quality"/>
+    <field name="serial_no">CMM-MCR-001</field>
+    <field name="model">Renishaw REVO CMM Bridge</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">180</field>
+    <field name="note">Full 3D dimensional inspection. REVO scanning head. Calibrated quarterly by Renishaw.</field>
+</record>
+<record id="equip_spectrometer" model="maintenance.equipment">
+    <field name="name">Optical Emission Spectrometer</field>
+    <field name="category_id" ref="equip_cat_quality"/>
+    <field name="serial_no">OES-MCR-001</field>
+    <field name="model">Spectromaxx OES</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">180</field>
+    <field name="note">Chemical composition analysis. Lines for Fe, Al, Cu base alloys. Calibrated biannually.</field>
+</record>
+<record id="equip_xray" model="maintenance.equipment">
+    <field name="name">X-Ray NDT Unit</field>
+    <field name="category_id" ref="equip_cat_quality"/>
+    <field name="serial_no">XRAY-MCR-001</field>
+    <field name="model">GE Phoenix v|tome|x</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">365</field>
+    <field name="note">Industrial CT scanning for internal defect detection. Aerospace and defence NDT.</field>
+</record>
+<record id="equip_microscope" model="maintenance.equipment">
+    <field name="name">Metallurgical Microscope</field>
+    <field name="category_id" ref="equip_cat_quality"/>
+    <field name="serial_no">MIC-MCR-001</field>
+    <field name="model">Olympus GX51 Inverted</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">365</field>
+    <field name="note">Metallurgical analysis, grain structure, porosity assessment.</field>
+</record>
+<record id="equip_heat_treat" model="maintenance.equipment">
+    <field name="name">Heat Treatment Oven #1</field>
+    <field name="category_id" ref="equip_cat_finishing"/>
+    <field name="serial_no">HT-MCR-001</field>
+    <field name="model">Carbolite CWF 1300</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">60</field>
+    <field name="note">Post-cast heat treatment. Max 1300°C. Stress relieving, annealing, solution treatment.</field>
+</record>
+<record id="equip_pressure_test" model="maintenance.equipment">
+    <field name="name">Pressure Test Rig</field>
+    <field name="category_id" ref="equip_cat_quality"/>
+    <field name="serial_no">PT-MCR-001</field>
+    <field name="model">Custom Hydraulic 400 bar</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">30</field>
+    <field name="note">Hydraulic pressure testing for oil and gas valve bodies. 400 bar max. Water and oil media.</field>
+</record>
+<record id="equip_overhead_crane" model="maintenance.equipment">
+    <field name="name">Overhead Gantry Crane – 5T</field>
+    <field name="category_id" ref="equip_cat_casting"/>
+    <field name="serial_no">CRANE-MCR-001</field>
+    <field name="model">Demag EKKE-Pro 5T</field>
+    <field name="technician_user_id" ref="base.user_admin"/>
+    <field name="maintenance_team_id" ref="maintenance.equipment_team_maintenance"/>
+    <field name="period">365</field>
+    <field name="note">5-tonne overhead crane for moving flask assemblies and large moulds. Annual LOLER inspection required.</field>
+</record>
+</odoo>

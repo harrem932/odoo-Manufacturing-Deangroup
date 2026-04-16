@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     MAIN APP MENU — appears in Odoo home screen
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_root"
+    name="Dean Group"
+    web_icon="dean_group_mfg,static/src/img/icon.png"
+    sequence="1"/>
+
+<!-- ══════════════════════════════════════════
+     SALES &amp; CRM
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_sales"
+    name="Sales &amp; Enquiries"
+    parent="menu_dg_root"
+    sequence="10"/>
+
+<menuitem id="menu_casting_enquiries"
+    name="Casting Enquiries"
+    parent="menu_dg_sales"
+    action="action_casting_enquiry"
+    sequence="10"/>
+
+<menuitem id="menu_crm_pipeline"
+    name="CRM Pipeline"
+    parent="menu_dg_sales"
+    action="crm.crm_lead_all_leads"
+    sequence="20"/>
+
+<menuitem id="menu_sales_orders"
+    name="Sales Orders"
+    parent="menu_dg_sales"
+    action="sale.action_quotations_with_onboarding"
+    sequence="30"/>
+
+<menuitem id="menu_customers"
+    name="Customers"
+    parent="menu_dg_sales"
+    action="base.action_partner_customer_form"
+    sequence="40"/>
+
+<!-- ══════════════════════════════════════════
+     MANUFACTURING
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_manufacturing"
+    name="Manufacturing"
+    parent="menu_dg_root"
+    sequence="20"/>
+
+<menuitem id="menu_mrp_orders"
+    name="Manufacturing Orders"
+    parent="menu_dg_manufacturing"
+    action="mrp.mrp_production_action"
+    sequence="10"/>
+
+<menuitem id="menu_mrp_workcenter"
+    name="Work Centres"
+    parent="menu_dg_manufacturing"
+    action="mrp.mrp_workcenter_action"
+    sequence="20"/>
+
+<menuitem id="menu_casting_processes"
+    name="Casting Processes"
+    parent="menu_dg_manufacturing"
+    action="action_casting_process"
+    sequence="30"/>
+
+<menuitem id="menu_bom"
+    name="Bills of Materials"
+    parent="menu_dg_manufacturing"
+    action="mrp.mrp_bom_form_action"
+    sequence="40"/>
+
+<!-- ══════════════════════════════════════════
+     INVENTORY &amp; SUPPLY
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_inventory"
+    name="Inventory &amp; Supply"
+    parent="menu_dg_root"
+    sequence="30"/>
+
+<menuitem id="menu_stock_products"
+    name="Products"
+    parent="menu_dg_inventory"
+    action="stock.product_template_action_product"
+    sequence="10"/>
+
+<menuitem id="menu_stock_moves"
+    name="Stock Movements"
+    parent="menu_dg_inventory"
+    action="stock.action_stock_view"
+    sequence="20"/>
+
+<menuitem id="menu_purchase_orders"
+    name="Purchase Orders"
+    parent="menu_dg_inventory"
+    action="purchase.purchase_rfq"
+    sequence="30"/>
+
+<menuitem id="menu_vendors"
+    name="Suppliers / Vendors"
+    parent="menu_dg_inventory"
+    action="base.action_partner_supplier_form"
+    sequence="40"/>
+
+<menuitem id="menu_china_supply"
+    name="China Supply Orders"
+    parent="menu_dg_inventory"
+    action="action_china_supply"
+    sequence="50"/>
+
+<menuitem id="menu_china_transit"
+    name="Orders In Transit"
+    parent="menu_dg_inventory"
+    action="action_china_supply_transit"
+    sequence="60"/>
+
+<!-- ══════════════════════════════════════════
+     QUALITY
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_quality"
+    name="Quality"
+    parent="menu_dg_root"
+    sequence="40"/>
+
+<menuitem id="menu_quality_inspections"
+    name="All Inspections"
+    parent="menu_dg_quality"
+    action="action_quality_inspection"
+    sequence="10"/>
+
+<menuitem id="menu_quality_pending_certs"
+    name="Pending Certificates"
+    parent="menu_dg_quality"
+    action="action_quality_pending_certs"
+    sequence="20"/>
+
+<!-- ══════════════════════════════════════════
+     HR &amp; PAYROLL
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_hr"
+    name="HR &amp; People"
+    parent="menu_dg_root"
+    sequence="50"/>
+
+<menuitem id="menu_foundry_employees"
+    name="Foundry Employees"
+    parent="menu_dg_hr"
+    action="action_foundry_employees"
+    sequence="10"/>
+
+<menuitem id="menu_apprentices"
+    name="Apprentices"
+    parent="menu_dg_hr"
+    action="action_apprentices"
+    sequence="20"/>
+
+<menuitem id="menu_leave"
+    name="Leave Management"
+    parent="menu_dg_hr"
+    action="hr_holidays.action_hr_holidays_dashboard"
+    sequence="30"/>
+
+<menuitem id="menu_attendance"
+    name="Attendance &amp; Shifts"
+    parent="menu_dg_hr"
+    action="hr_attendance.hr_attendance_action"
+    sequence="40"/>
+
+<menuitem id="menu_payroll"
+    name="Payroll"
+    parent="menu_dg_hr"
+    action="hr_payroll.action_hr_payslip_tree"
+    sequence="50"/>
+
+<menuitem id="menu_recruitment"
+    name="Recruitment"
+    parent="menu_dg_hr"
+    action="hr_recruitment.action_hr_applicants"
+    sequence="60"/>
+
+<!-- ══════════════════════════════════════════
+     MAINTENANCE
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_maintenance"
+    name="Maintenance"
+    parent="menu_dg_root"
+    sequence="60"/>
+
+<menuitem id="menu_equipment"
+    name="Equipment"
+    parent="menu_dg_maintenance"
+    action="maintenance.hr_equipment_action"
+    sequence="10"/>
+
+<menuitem id="menu_maintenance_requests"
+    name="Maintenance Requests"
+    parent="menu_dg_maintenance"
+    action="maintenance.hr_equipment_request_action"
+    sequence="20"/>
+
+<!-- ══════════════════════════════════════════
+     ACCOUNTING
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_accounting"
+    name="Accounting"
+    parent="menu_dg_root"
+    sequence="70"/>
+
+<menuitem id="menu_invoices"
+    name="Customer Invoices"
+    parent="menu_dg_accounting"
+    action="account.action_move_out_invoice_type"
+    sequence="10"/>
+
+<menuitem id="menu_vendor_bills"
+    name="Vendor Bills"
+    parent="menu_dg_accounting"
+    action="account.action_move_in_invoice_type"
+    sequence="20"/>
+
+<menuitem id="menu_bank"
+    name="Bank &amp; Cash"
+    parent="menu_dg_accounting"
+    action="account.action_account_reconcile_model"
+    sequence="30"/>
+
+<!-- ══════════════════════════════════════════
+     WEBSITE
+══════════════════════════════════════════ -->
+<menuitem id="menu_dg_website"
+    name="Website"
+    parent="menu_dg_root"
+    sequence="80"/>
+
+<menuitem id="menu_website_homepage"
+    name="View Homepage"
+    parent="menu_dg_website"
+    action="website.action_website"
+    sequence="10"/>
+
+<menuitem id="menu_website_editor"
+    name="Website Editor"
+    parent="menu_dg_website"
+    action="website.action_website_pages_list"
+    sequence="20"/>
+
+<menuitem id="menu_blog"
+    name="News / Blog"
+    parent="menu_dg_website"
+    action="website_blog.action_blog_post"
+    sequence="30"/>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Product data placeholder - add product records here when needed -->
+<!-- Example:
+<record id="product_investment_casting_ss316" model="product.template">
+    <field name="name">Investment Casting – 316L Stainless Steel</field>
+    <field name="type">product</field>
+    <field name="categ_id" ref="product.product_category_all"/>
+    <field name="uom_id" ref="uom.product_uom_unit"/>
+    <field name="uom_po_id" ref="uom.product_uom_unit"/>
+    <field name="standard_price">8.50</field>
+    <field name="description_sale">Precision investment casting in 316L stainless steel. ISO 9001:2015 quality. Certificate of Conformity included.</field>
+</record>
+-->
+</odoo>

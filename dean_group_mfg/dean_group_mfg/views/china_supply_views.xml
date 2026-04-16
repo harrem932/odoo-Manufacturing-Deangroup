@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_china_supply_list" model="ir.ui.view">
+    <field name="name">dg.china.supply.list</field>
+    <field name="model">dg.china.supply</field>
+    <field name="arch" type="xml">
+        <list string="China Supply Orders"
+              decoration-warning="state=='in_transit'"
+              decoration-success="state=='inspected'"
+              decoration-danger="quality_hold == True">
+            <field name="name"/>
+            <field name="vendor_id"/>
+            <field name="product_id"/>
+            <field name="process_id"/>
+            <field name="quantity"/>
+            <field name="total_gbp" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            <field name="order_date"/>
+            <field name="etd_date"/>
+            <field name="eta_date"/>
+            <field name="state" widget="badge"
+                   decoration-warning="state=='in_transit'"
+                   decoration-success="state=='inspected'"
+                   decoration-info="state=='customs'"/>
+            <field name="quality_hold" widget="boolean_toggle"/>
+        </list>
+    </field>
+</record>
+
+<record id="view_china_supply_form" model="ir.ui.view">
+    <field name="name">dg.china.supply.form</field>
+    <field name="model">dg.china.supply</field>
+    <field name="arch" type="xml">
+        <form string="China Supply Order">
+            <header>
+                <button name="action_confirm"  string="Confirm Order"   type="object"
+                        invisible="state != 'draft'" class="btn-primary"/>
+                <button name="action_transit"  string="Mark In Transit" type="object"
+                        invisible="state != 'confirmed'"/>
+                <button name="action_received" string="Mark Received"   type="object"
+                        invisible="state != 'in_transit'"/>
+                <button name="action_released" string="Inspected &amp; Release" type="object"
+                        invisible="state != 'received'" class="btn-success"/>
+                <field name="state" widget="statusbar"
+                       statusbar_visible="draft,confirmed,in_transit,customs,received,inspected"/>
+            </header>
+            <sheet>
+                <widget name="web_ribbon" title="Quality Hold" bg_color="bg-danger"
+                        invisible="not quality_hold"/>
+                <div class="oe_title">
+                    <label for="name"/>
+                    <h1><field name="name" readonly="1"/></h1>
+                </div>
+                <group>
+                    <group string="Supplier &amp; Product">
+                        <field name="vendor_id"/>
+                        <field name="product_id"/>
+                        <field name="process_id"/>
+                        <field name="quantity"/>
+                    </group>
+                    <group string="Pricing">
+                        <field name="unit_price"/>
+                        <field name="exchange_rate"/>
+                        <field name="total_cny"/>
+                        <field name="total_gbp"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Timeline">
+                        <field name="order_date"/>
+                        <field name="etd_date"/>
+                        <field name="eta_date"/>
+                    </group>
+                    <group string="Status">
+                        <field name="quality_hold"/>
+                        <field name="purchase_order_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                </group>
+                <field name="notes" placeholder="Notes on this supply order..."/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_china_supply_search" model="ir.ui.view">
+    <field name="name">dg.china.supply.search</field>
+    <field name="model">dg.china.supply</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <field name="vendor_id"/>
+            <field name="product_id"/>
+            <filter string="In Transit" name="transit" domain="[('state','=','in_transit')]"/>
+            <filter string="Quality Hold" name="hold" domain="[('quality_hold','=',True)]"/>
+            <filter string="Awaiting Inspection" name="awaiting"
+                    domain="[('state','=','received')]"/>
+            <group expand="0" string="Group By">
+                <filter string="Supplier" name="by_vendor" context="{'group_by':'vendor_id'}"/>
+                <filter string="Status"   name="by_state"  context="{'group_by':'state'}"/>
+                <filter string="Month"    name="by_month"  context="{'group_by':'order_date:month'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="action_china_supply" model="ir.actions.act_window">
+    <field name="name">China Supply Orders</field>
+    <field name="res_model">dg.china.supply</field>
+    <field name="view_mode">list,form</field>
+</record>
+
+<record id="action_china_supply_transit" model="ir.actions.act_window">
+    <field name="name">Orders In Transit</field>
+    <field name="res_model">dg.china.supply</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('state','in',['in_transit','customs'])]</field>
+</record>
+
+</odoo>

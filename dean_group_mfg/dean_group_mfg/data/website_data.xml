@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Set Dean Group as the default Odoo website -->
+<record id="website_dean_group" model="website">
+    <field name="name">Dean Group International</field>
+    <field name="domain">https://www.deangroup-int.co.uk</field>
+    <field name="company_id" ref="company_dg_uk"/>
+    <field name="homepage_url">/</field>
+    <field name="favicon">/dean_group_mfg/static/src/img/favicon.png</field>
+</record>
+
+<!-- Odoo website menu items that mirror deangroup-int.co.uk structure -->
+<record id="menu_home" model="website.menu">
+    <field name="name">Home</field>
+    <field name="url">/</field>
+    <field name="sequence">10</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_services" model="website.menu">
+    <field name="name">Services</field>
+    <field name="url">/services</field>
+    <field name="sequence">20</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_markets" model="website.menu">
+    <field name="name">Markets</field>
+    <field name="url">/markets</field>
+    <field name="sequence">30</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_quality" model="website.menu">
+    <field name="name">Quality</field>
+    <field name="url">/quality</field>
+    <field name="sequence">40</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_about" model="website.menu">
+    <field name="name">About Us</field>
+    <field name="url">/about</field>
+    <field name="sequence">50</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_careers" model="website.menu">
+    <field name="name">Careers</field>
+    <field name="url">/careers</field>
+    <field name="sequence">60</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_news" model="website.menu">
+    <field name="name">News</field>
+    <field name="url">/blog</field>
+    <field name="sequence">70</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_contact" model="website.menu">
+    <field name="name">Contact Us</field>
+    <field name="url">/contact</field>
+    <field name="sequence">80</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+<record id="menu_quote" model="website.menu">
+    <field name="name">Get a Quote</field>
+    <field name="url">/get-quote</field>
+    <field name="sequence">90</field>
+    <field name="website_id" ref="website_dean_group"/>
+</record>
+</odoo>

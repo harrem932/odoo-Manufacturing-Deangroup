@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     EMAIL TEMPLATES — Dean Group International
+══════════════════════════════════════════ -->
+
+<!-- 1. New Casting Enquiry Received (to sales team) -->
+<record id="mail_template_new_enquiry" model="mail.template">
+    <field name="name">DG: New Casting Enquiry Received</field>
+    <field name="model_id" ref="model_dg_casting_enquiry"/>
+    <field name="subject">New Casting Enquiry – {{ object.name }} – {{ object.partner_id.name }}</field>
+    <field name="email_from">{{ user.email_formatted }}</field>
+    <field name="email_to">sales@deangroup-int.co.uk</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#d94f0c;padding:20px;border-radius:4px 4px 0 0">
+    <h2 style="color:#fff;margin:0">New Casting Enquiry – {{ object.name }}</h2>
+  </div>
+  <div style="background:#f9f9f9;padding:20px;border:1px solid #ddd">
+    <p><strong>Customer:</strong> {{ object.partner_id.name }}</p>
+    <p><strong>Contact:</strong> {{ object.contact_name or 'N/A' }}</p>
+    <p><strong>Industry:</strong> {{ object.industry or 'N/A' }}</p>
+    <p><strong>Process:</strong> {{ object.process_id.name if object.process_id else 'Not specified' }}</p>
+    <p><strong>Material:</strong> {{ object.material or 'Not specified' }}</p>
+    <p><strong>Annual Qty:</strong> {{ object.quantity_annual or 'N/A' }}</p>
+    <p><strong>Supply Route:</strong> {{ object.supply_route or 'TBC' }}</p>
+    <p><strong>Est. Value:</strong> £{{ '{:,.0f}'.format(object.estimated_value or 0) }}/year</p>
+    {% if object.description %}
+    <p><strong>Description:</strong><br/>{{ object.description }}</p>
+    {% endif %}
+  </div>
+  <div style="background:#fff;padding:16px;border:1px solid #ddd;border-top:none">
+    <a href="{{ ctx.get('url', '') }}" style="background:#d94f0c;color:#fff;padding:10px 20px;border-radius:3px;text-decoration:none;font-weight:bold">
+      View in Odoo →
+    </a>
+  </div>
+  <p style="font-size:11px;color:#999;margin-top:12px">
+    Dean Group International · 0161 775 1633 · sales@deangroup-int.co.uk
+  </p>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+<!-- 2. Quote Sent to Customer -->
+<record id="mail_template_quote_sent" model="mail.template">
+    <field name="name">DG: Quotation Sent to Customer</field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="subject">Dean Group International – Quotation {{ object.name }}</field>
+    <field name="email_from">sales@deangroup-int.co.uk</field>
+    <field name="email_to">{{ object.partner_id.email }}</field>
+    <field name="reply_to">sales@deangroup-int.co.uk</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#d94f0c;padding:20px">
+    <h2 style="color:#fff;margin:0">Casting Quotation – {{ object.name }}</h2>
+    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0">Dean Group International Ltd</p>
+  </div>
+  <div style="padding:20px;background:#fff;border:1px solid #ddd">
+    <p>Dear {{ object.partner_id.name }},</p>
+    <p>Thank you for your enquiry. Please find attached our quotation <strong>{{ object.name }}</strong> for the casting components discussed.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0">
+      <tr style="background:#f5f5f5">
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Reference</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.name }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Customer PO Ref</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.customer_po_ref or 'N/A' }}</td>
+      </tr>
+      <tr style="background:#f5f5f5">
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Supply Route</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.supply_site or 'UK Foundry' }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Valid Until</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.validity_date or '30 days from issue' }}</td>
+      </tr>
+    </table>
+    <p>This quotation is valid for 30 days. To place an order or discuss requirements further, please contact us.</p>
+    <p>
+      <a href="mailto:sales@deangroup-int.co.uk" style="color:#d94f0c">sales@deangroup-int.co.uk</a>
+      | 0161 775 1633
+    </p>
+  </div>
+  <div style="background:#f9f9f9;padding:12px;border:1px solid #ddd;border-top:none;font-size:11px;color:#777">
+    Dean Group International Ltd · Brinell Drive, Northbank Industrial Park, Irlam, Manchester M44 5BL<br/>
+    VAT No: GB146307478 · Company No: 1062820 · ISO 9001:2015 Certified
+  </div>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+<!-- 3. Certificate of Conformity Issued -->
+<record id="mail_template_cert_issued" model="mail.template">
+    <field name="name">DG: Certificate of Conformity Issued</field>
+    <field name="model_id" ref="model_dg_quality_inspection"/>
+    <field name="subject">Certificate of Conformity – {{ object.name }} – Dean Group International</field>
+    <field name="email_from">quality@deangroup-int.co.uk</field>
+    <field name="email_to">{{ object.partner_id.email if object.partner_id else '' }}</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#15803d;padding:20px">
+    <h2 style="color:#fff;margin:0">✅ Certificate of Conformity Issued</h2>
+    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0">Reference: {{ object.name }}</p>
+  </div>
+  <div style="padding:20px;background:#fff;border:1px solid #ddd">
+    <p>Dear {{ object.partner_id.name if object.partner_id else 'Customer' }},</p>
+    <p>Please find attached the Certificate of Conformity for your recent order.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0">
+      <tr style="background:#f5f5f5">
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Inspection Ref</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.name }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Date</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.inspection_date }}</td>
+      </tr>
+      <tr style="background:#f5f5f5">
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Qty Accepted</td>
+        <td style="padding:8px;border:1px solid #ddd">{{ object.qty_accepted }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #ddd;font-weight:bold">Overall Result</td>
+        <td style="padding:8px;border:1px solid #ddd;color:#15803d;font-weight:bold">PASS</td>
+      </tr>
+    </table>
+    <p>If you have any queries regarding this certificate, please contact our quality team.</p>
+  </div>
+  <div style="background:#f9f9f9;padding:12px;border:1px solid #ddd;border-top:none;font-size:11px;color:#777">
+    Dean Group International Ltd · ISO 9001:2015 Certified · BSI Cert No. FS 25398<br/>
+    quality@deangroup-int.co.uk · 0161 775 1633
+  </div>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+<!-- 4. China Order Dispatched -->
+<record id="mail_template_china_dispatched" model="mail.template">
+    <field name="name">DG: China Supply Order Dispatched</field>
+    <field name="model_id" ref="model_dg_china_supply"/>
+    <field name="subject">China Supply Update – {{ object.name }} – Dispatched</field>
+    <field name="email_from">sales@deangroup-int.co.uk</field>
+    <field name="email_to">{{ user.email_formatted }}</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#2563eb;padding:20px">
+    <h2 style="color:#fff;margin:0">🚢 China Supply Order Dispatched</h2>
+    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0">{{ object.name }}</p>
+  </div>
+  <div style="padding:20px;background:#fff;border:1px solid #ddd">
+    <p><strong>Supplier:</strong> {{ object.vendor_id.name }}</p>
+    <p><strong>Component:</strong> {{ object.product_id.name if object.product_id else 'N/A' }}</p>
+    <p><strong>Quantity:</strong> {{ object.quantity }}</p>
+    <p><strong>ETD (China):</strong> {{ object.etd_date or 'TBC' }}</p>
+    <p><strong>ETA (Manchester):</strong> {{ object.eta_date or 'TBC' }}</p>
+    <p><strong>Total Value:</strong> £{{ '{:,.2f}'.format(object.total_gbp or 0) }}</p>
+    <p style="margin-top:16px;color:#d94f0c;font-weight:bold">
+      ⚠️ Remember: All China deliveries go to Quarantine location for inspection before release.
+    </p>
+  </div>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+<!-- 5. Job Application Received -->
+<record id="mail_template_job_application" model="mail.template">
+    <field name="name">DG: Job Application Received</field>
+    <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+    <field name="subject">Application Received – {{ object.job_id.name }} – Dean Group International</field>
+    <field name="email_from">careers@deangroup-int.co.uk</field>
+    <field name="email_to">{{ object.email_from }}</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#d94f0c;padding:20px">
+    <h2 style="color:#fff;margin:0">Application Received</h2>
+    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0">Dean Group International Ltd</p>
+  </div>
+  <div style="padding:20px;background:#fff;border:1px solid #ddd">
+    <p>Dear {{ object.partner_name or 'Applicant' }},</p>
+    <p>Thank you for your application for the position of <strong>{{ object.job_id.name }}</strong> at Dean Group International.</p>
+    <p>We have received your application and will be in touch within 5 working days to advise on next steps.</p>
+    <p>In the meantime, if you have any questions please contact us at
+      <a href="mailto:careers@deangroup-int.co.uk" style="color:#d94f0c">careers@deangroup-int.co.uk</a>.
+    </p>
+    <p>Kind regards,<br/>HR Team<br/>Dean Group International</p>
+  </div>
+  <div style="background:#f9f9f9;padding:12px;border:1px solid #ddd;border-top:none;font-size:11px;color:#777">
+    Dean Group International Ltd · Brinell Drive, Northbank Industrial Park, Irlam, Manchester M44 5BL
+  </div>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+<!-- 6. PPM Overdue Alert (used by cron) -->
+<record id="mail_template_ppm_overdue" model="mail.template">
+    <field name="name">DG: Equipment PPM Overdue Alert</field>
+    <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+    <field name="subject">⚠️ PPM Overdue – {{ object.name }}</field>
+    <field name="email_from">maintenance@deangroup-int.co.uk</field>
+    <field name="email_to">maintenance@deangroup-int.co.uk</field>
+    <field name="body_html"><![CDATA[
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+  <div style="background:#dc2626;padding:20px">
+    <h2 style="color:#fff;margin:0">⚠️ PPM Overdue</h2>
+  </div>
+  <div style="padding:20px;background:#fff;border:1px solid #ddd">
+    <p><strong>Equipment:</strong> {{ object.name }}</p>
+    <p><strong>Serial No:</strong> {{ object.serial_no or 'N/A' }}</p>
+    <p><strong>Foundry Zone:</strong> {{ object.foundry_zone or 'N/A' }}</p>
+    <p><strong>Last PPM:</strong> {{ object.last_ppm_date or 'Never' }}</p>
+    <p><strong>PPM Was Due:</strong> {{ object.next_ppm_due or 'N/A' }}</p>
+    <p style="margin-top:16px;color:#dc2626;font-weight:bold">
+      Action required: Please schedule and complete PPM for this equipment immediately.
+    </p>
+  </div>
+</div>
+    ]]></field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+</odoo>

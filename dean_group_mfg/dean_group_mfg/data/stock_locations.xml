@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     STOCK LOCATIONS — Foundry warehouse structure
+══════════════════════════════════════════ -->
+
+<!-- UK Foundry Warehouse -->
+<record id="stock_warehouse_manchester" model="stock.warehouse">
+    <field name="name">Manchester Foundry</field>
+    <field name="code">MCR</field>
+    <field name="is_foundry_warehouse" eval="True"/>
+    <field name="site">manchester</field>
+    <field name="company_id" ref="company_dg_uk"/>
+</record>
+
+<!-- Raw Material Store -->
+<record id="loc_raw_material" model="stock.location">
+    <field name="name">Raw Material Store</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">raw_material</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Wax Room -->
+<record id="loc_wax_room" model="stock.location">
+    <field name="name">Wax Room – WIP</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">wax_room</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Shell Room -->
+<record id="loc_shell_room" model="stock.location">
+    <field name="name">Shell Room – WIP</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">shell_room</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Casting Floor -->
+<record id="loc_casting_floor" model="stock.location">
+    <field name="name">Casting Floor – WIP</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">casting_floor</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Quality Hold -->
+<record id="loc_quality_hold" model="stock.location">
+    <field name="name">Quality Hold</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">quality_hold</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Finished Goods -->
+<record id="loc_finished_goods" model="stock.location">
+    <field name="name">Finished Goods – UK Warehouse</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">finished_goods</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- China Quarantine (incoming from Asia) -->
+<record id="loc_china_quarantine" model="stock.location">
+    <field name="name">China Supply – Quarantine</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">china_quarantine</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- China Released -->
+<record id="loc_china_released" model="stock.location">
+    <field name="name">China Supply – Released to Stock</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">china_released</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Despatch Bay -->
+<record id="loc_despatch" model="stock.location">
+    <field name="name">Despatch Bay</field>
+    <field name="usage">internal</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">despatch</field>
+    <field name="site">manchester</field>
+</record>
+
+<!-- Scrap -->
+<record id="loc_scrap_foundry" model="stock.location">
+    <field name="name">Foundry Scrap</field>
+    <field name="usage">inventory</field>
+    <field name="location_id" ref="stock.stock_location_locations"/>
+    <field name="is_foundry_location" eval="True"/>
+    <field name="foundry_zone">scrap</field>
+    <field name="site">manchester</field>
+    <field name="scrap_location" eval="True"/>
+</record>
+
+</odoo>

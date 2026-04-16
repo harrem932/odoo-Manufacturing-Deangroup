@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dg_casting_process_user,dg.casting.process user,model_dg_casting_process,group_dg_user,1,0,0,0
+access_dg_casting_process_mgr,dg.casting.process manager,model_dg_casting_process,group_dg_manager,1,1,1,1
+access_dg_casting_enquiry_user,dg.casting.enquiry user,model_dg_casting_enquiry,group_dg_user,1,1,1,0
+access_dg_casting_enquiry_mgr,dg.casting.enquiry manager,model_dg_casting_enquiry,group_dg_manager,1,1,1,1
+access_dg_quality_inspection_user,dg.quality.inspection user,model_dg_quality_inspection,group_dg_user,1,1,1,0
+access_dg_quality_inspection_mgr,dg.quality.inspection manager,model_dg_quality_inspection,group_dg_manager,1,1,1,1
+access_dg_china_supply_user,dg.china.supply user,model_dg_china_supply,group_dg_user,1,1,1,0
+access_dg_china_supply_mgr,dg.china.supply manager,model_dg_china_supply,group_dg_manager,1,1,1,1
+access_dg_shift_schedule_user,dg.shift.schedule user,model_dg_shift_schedule,group_dg_user,1,0,0,0
+access_dg_shift_schedule_mgr,dg.shift.schedule manager,model_dg_shift_schedule,group_dg_manager,1,1,1,1
+access_dg_shift_line_user,dg.shift.schedule.line user,model_dg_shift_schedule_line,group_dg_user,1,0,0,0
+access_dg_shift_line_mgr,dg.shift.schedule.line manager,model_dg_shift_schedule_line,group_dg_manager,1,1,1,1
+access_dg_quote_wizard,dg.casting.quote.wizard,model_dg_casting_quote_wizard,group_dg_user,1,1,1,1
+access_dg_cert_wizard,dg.bulk.cert.wizard,model_dg_bulk_cert_wizard,group_dg_user,1,1,1,1

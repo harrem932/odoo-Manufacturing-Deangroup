@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ══════════════════════════════════════════
+     PAYROLL STRUCTURE — Dean Group UK Foundry
+══════════════════════════════════════════ -->
+<record id="structure_dg_foundry" model="hr.payroll.structure">
+    <field name="name">Dean Group – UK Foundry Worker</field>
+    <field name="code">DG_FOUNDRY</field>
+    <field name="is_foundry_structure" eval="True"/>
+    <field name="applies_to_shift">all</field>
+    <field name="note">Standard payroll structure for Dean Group International hourly and salaried foundry workers. Includes UK NI, PAYE and pension.</field>
+</record>
+
+<record id="structure_dg_apprentice" model="hr.payroll.structure">
+    <field name="name">Dean Group – Apprentice</field>
+    <field name="code">DG_APPRENTICE</field>
+    <field name="is_foundry_structure" eval="True"/>
+    <field name="note">Apprentice payroll structure. National Minimum Wage apprentice rate applies for Year 1. Standard NMW for years 2+ over age 19.</field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     SALARY RULE CATEGORIES
+══════════════════════════════════════════ -->
+<record id="rule_category_basic" model="hr.salary.rule.category">
+    <field name="name">DG Basic Pay</field>
+    <field name="code">DG_BASIC</field>
+</record>
+<record id="rule_category_allowance" model="hr.salary.rule.category">
+    <field name="name">DG Allowances</field>
+    <field name="code">DG_ALLOW</field>
+</record>
+<record id="rule_category_deduction" model="hr.salary.rule.category">
+    <field name="name">DG Deductions</field>
+    <field name="code">DG_DED</field>
+</record>
+<record id="rule_category_net" model="hr.salary.rule.category">
+    <field name="name">DG Net Pay</field>
+    <field name="code">DG_NET</field>
+</record>
+
+<!-- ══════════════════════════════════════════
+     SALARY RULES
+══════════════════════════════════════════ -->
+
+<!-- 1. Basic Salary -->
+<record id="rule_basic_salary" model="hr.salary.rule">
+    <field name="name">Basic Salary</field>
+    <field name="code">BASIC</field>
+    <field name="sequence">10</field>
+    <field name="category_id" ref="rule_category_basic"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = contract.wage</field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">basic</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Monthly contracted salary / wage.</field>
+</record>
+
+<!-- 2. Night Shift Allowance (£2.50/hr premium) -->
+<record id="rule_night_shift" model="hr.salary.rule">
+    <field name="name">Night Shift Allowance</field>
+    <field name="code">NIGHT_ALLOW</field>
+    <field name="sequence">20</field>
+    <field name="category_id" ref="rule_category_allowance"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = employee.shift == 'night'</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+# £2.50/hr premium for night shift × hours worked
+result = payslip.night_shift_hours * 2.50
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">allowance</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Night shift premium £2.50/hr. Applies to 22:00–06:00 shift pattern only.</field>
+</record>
+
+<!-- 3. Late Shift Allowance (£1.50/hr premium) -->
+<record id="rule_late_shift" model="hr.salary.rule">
+    <field name="name">Late Shift Allowance</field>
+    <field name="code">LATE_ALLOW</field>
+    <field name="sequence">22</field>
+    <field name="category_id" ref="rule_category_allowance"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = employee.shift == 'late'</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+result = payslip.late_shift_hours * 1.50
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">allowance</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Late shift premium £1.50/hr. Applies to 14:00–22:00 shift pattern.</field>
+</record>
+
+<!-- 4. Overtime (time and a half) -->
+<record id="rule_overtime" model="hr.salary.rule">
+    <field name="name">Overtime Pay</field>
+    <field name="code">OVERTIME</field>
+    <field name="sequence">25</field>
+    <field name="category_id" ref="rule_category_allowance"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = payslip.overtime_hours &gt; 0</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+# Hourly rate = annual salary / 52 weeks / contracted hours
+hourly = contract.wage * 12 / 52 / 40
+result = payslip.overtime_hours * hourly * 1.5
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">allowance</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Overtime at time and a half (1.5×). Applies beyond contracted hours.</field>
+</record>
+
+<!-- 5. Bank Holiday Pay -->
+<record id="rule_bank_holiday" model="hr.salary.rule">
+    <field name="name">Bank Holiday Pay</field>
+    <field name="code">BH_PAY</field>
+    <field name="sequence">27</field>
+    <field name="category_id" ref="rule_category_allowance"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = payslip.bank_holiday_days &gt; 0</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+# Double time for bank holiday working
+daily = contract.wage * 12 / 52 / 5
+result = payslip.bank_holiday_days * daily * 2
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">allowance</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Bank holiday working paid at double time.</field>
+</record>
+
+<!-- 6. Gross Pay (sum of all above) -->
+<record id="rule_gross" model="hr.salary.rule">
+    <field name="name">Gross Pay</field>
+    <field name="code">GROSS</field>
+    <field name="sequence">50</field>
+    <field name="category_id" ref="rule_category_basic"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+result = categories.DG_BASIC + categories.DG_ALLOW
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">basic</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Total gross earnings before deductions.</field>
+</record>
+
+<!-- 7. Employee National Insurance (Class 1) -->
+<record id="rule_employee_ni" model="hr.salary.rule">
+    <field name="name">Employee National Insurance (Class 1)</field>
+    <field name="code">EMP_NI</field>
+    <field name="sequence">60</field>
+    <field name="category_id" ref="rule_category_deduction"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+# 2024/25: 8% on earnings between £1,048–£4,189/month
+gross = categories.DG_BASIC + categories.DG_ALLOW
+lower = 1048.0   # Primary Threshold (monthly)
+upper = 4189.0   # Upper Earnings Limit (monthly)
+ni_rate = 0.08
+if gross &lt;= lower:
+    result = 0
+elif gross &lt;= upper:
+    result = -(gross - lower) * ni_rate
+else:
+    result = -((upper - lower) * ni_rate + (gross - upper) * 0.02)
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">ni</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Employee Class 1 NI. 8% between PT and UEL, 2% above UEL. 2024/25 rates.</field>
+</record>
+
+<!-- 8. PAYE Income Tax -->
+<record id="rule_paye_tax" model="hr.salary.rule">
+    <field name="name">PAYE Income Tax</field>
+    <field name="code">PAYE</field>
+    <field name="sequence">65</field>
+    <field name="category_id" ref="rule_category_deduction"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+# Simplified PAYE: Personal allowance £12,570/yr = £1,047.50/mo
+# Basic rate 20% up to £50,270/yr, Higher rate 40% above
+gross = categories.DG_BASIC + categories.DG_ALLOW
+personal_allowance_monthly = 1047.50
+basic_rate_limit_monthly = 4189.17  # (50270-12570)/12 + PA
+taxable = max(0, gross - personal_allowance_monthly)
+if gross &lt;= basic_rate_limit_monthly:
+    result = -(taxable * 0.20)
+else:
+    basic_taxable = basic_rate_limit_monthly - personal_allowance_monthly
+    higher_taxable = gross - basic_rate_limit_monthly
+    result = -((basic_taxable * 0.20) + (higher_taxable * 0.40))
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">income_tax</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">PAYE income tax. Standard L tax code assumed. 2024/25 rates. Actual tax code applied via HMRC RTI.</field>
+</record>
+
+<!-- 9. Employee Pension (Auto-Enrolment 5%) -->
+<record id="rule_employee_pension" model="hr.salary.rule">
+    <field name="name">Employee Pension (Auto-Enrolment)</field>
+    <field name="code">EMP_PENSION</field>
+    <field name="sequence">70</field>
+    <field name="category_id" ref="rule_category_deduction"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = payslip.pension_enrolled</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+gross = categories.DG_BASIC + categories.DG_ALLOW
+rate = payslip.pension_employee_pct / 100 if payslip.pension_employee_pct else 0.05
+result = -(gross * rate)
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">pension</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Employee auto-enrolment pension contribution. Default 5% of qualifying earnings.</field>
+</record>
+
+<!-- 10. Employer Pension (not on payslip but computed) -->
+<record id="rule_employer_pension" model="hr.salary.rule">
+    <field name="name">Employer Pension Contribution</field>
+    <field name="code">EMP_R_PENSION</field>
+    <field name="sequence">72</field>
+    <field name="category_id" ref="rule_category_deduction"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = payslip.pension_enrolled</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+gross = categories.DG_BASIC + categories.DG_ALLOW
+rate = payslip.pension_employer_pct / 100 if payslip.pension_employer_pct else 0.03
+result = -(gross * rate)
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">pension</field>
+    <field name="appears_on_payslip" eval="False"/>
+    <field name="note">Employer pension contribution 3% minimum. Not shown on payslip but recorded for reporting.</field>
+</record>
+
+<!-- 11. NET PAY -->
+<record id="rule_net_pay" model="hr.salary.rule">
+    <field name="name">NET PAY</field>
+    <field name="code">NET</field>
+    <field name="sequence">200</field>
+    <field name="category_id" ref="rule_category_net"/>
+    <field name="struct_id" ref="structure_dg_foundry"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+result = categories.DG_BASIC + categories.DG_ALLOW + categories.DG_DED
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">net</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">Net pay after all deductions.</field>
+</record>
+
+<!-- ══ Apprentice structure rules ══ -->
+<record id="rule_apprentice_basic" model="hr.salary.rule">
+    <field name="name">Apprentice Basic Pay</field>
+    <field name="code">APP_BASIC</field>
+    <field name="sequence">10</field>
+    <field name="category_id" ref="rule_category_basic"/>
+    <field name="struct_id" ref="structure_dg_apprentice"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = contract.wage</field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">basic</field>
+    <field name="appears_on_payslip" eval="True"/>
+    <field name="note">NMW Apprentice Rate £6.40/hr (2024/25) for Year 1 or under 19. Standard NMW for Year 2+ if 19+.</field>
+</record>
+
+<record id="rule_apprentice_net" model="hr.salary.rule">
+    <field name="name">Apprentice NET PAY</field>
+    <field name="code">APP_NET</field>
+    <field name="sequence">200</field>
+    <field name="category_id" ref="rule_category_net"/>
+    <field name="struct_id" ref="structure_dg_apprentice"/>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+result = categories.DG_BASIC + categories.DG_ALLOW + categories.DG_DED
+    </field>
+    <field name="is_uk_rule" eval="True"/>
+    <field name="hmrc_category">net</field>
+    <field name="appears_on_payslip" eval="True"/>
+</record>
+
+</odoo>

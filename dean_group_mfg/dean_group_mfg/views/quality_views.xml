@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_quality_list" model="ir.ui.view">
+    <field name="name">dg.quality.inspection.list</field>
+    <field name="model">dg.quality.inspection</field>
+    <field name="arch" type="xml">
+        <list string="Quality Inspections"
+              decoration-success="overall_result=='pass'"
+              decoration-danger="overall_result in ['fail','scrap']"
+              decoration-warning="overall_result=='hold'">
+            <field name="name"/>
+            <field name="inspection_date"/>
+            <field name="inspection_type" widget="badge"/>
+            <field name="partner_id"/>
+            <field name="product_id"/>
+            <field name="qty_inspected"/>
+            <field name="qty_rejected"/>
+            <field name="rejection_pct" widget="percentage" digits="[16,1]"/>
+            <field name="overall_result" widget="badge"
+                   decoration-success="overall_result=='pass'"
+                   decoration-danger="overall_result in ['fail','scrap']"
+                   decoration-warning="overall_result=='hold'"/>
+            <field name="cert_language"/>
+            <field name="certificate_issued" widget="boolean_toggle"/>
+            <field name="inspector_id"/>
+        </list>
+    </field>
+</record>
+
+<record id="view_quality_form" model="ir.ui.view">
+    <field name="name">dg.quality.inspection.form</field>
+    <field name="model">dg.quality.inspection</field>
+    <field name="arch" type="xml">
+        <form string="Quality Inspection">
+            <header>
+                <button name="action_issue_cert" string="Issue Certificate of Conformity"
+                        type="object" class="btn-primary"
+                        invisible="overall_result != 'pass' or certificate_issued"/>
+                <field name="overall_result" widget="statusbar"
+                       statusbar_visible="hold,pass,fail,scrap"/>
+            </header>
+            <sheet>
+                <widget name="web_ribbon" title="Cert Issued" bg_color="bg-success"
+                        invisible="not certificate_issued"/>
+                <div class="oe_title">
+                    <label for="name"/>
+                    <h1><field name="name" readonly="1"/></h1>
+                </div>
+                <group>
+                    <group string="Inspection Details">
+                        <field name="inspection_date"/>
+                        <field name="inspection_type"/>
+                        <field name="inspector_id"/>
+                        <field name="partner_id" string="Customer / Supplier"/>
+                    </group>
+                    <group string="Component">
+                        <field name="product_id"/>
+                        <field name="lot_id"
+                               domain="[('product_id','=',product_id)]"/>
+                        <field name="mo_id"/>
+                        <field name="material_cert_ref"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page name="results" string="Inspection Results">
+                        <group>
+                            <group string="Quantities">
+                                <field name="qty_inspected"/>
+                                <field name="qty_rejected"/>
+                                <field name="qty_accepted"/>
+                                <field name="rejection_pct" widget="percentage" digits="[16,1]"/>
+                            </group>
+                            <group string="Overall">
+                                <field name="overall_result" widget="radio"/>
+                                <field name="certificate_issued"/>
+                                <field name="cert_language"
+                                       invisible="not certificate_issued"/>
+                            </group>
+                        </group>
+                        <separator string="Dimensional"/>
+                        <group>
+                            <field name="dimensional_result" widget="radio" options="{'horizontal': true}"/>
+                            <field name="dimensional_notes" placeholder="Dimensional inspection notes..."/>
+                        </group>
+                        <separator string="Visual"/>
+                        <group>
+                            <field name="visual_result" widget="radio" options="{'horizontal': true}"/>
+                            <field name="visual_notes" placeholder="Visual inspection notes..."/>
+                        </group>
+                        <separator string="Chemical / Material"/>
+                        <group>
+                            <field name="chemical_result" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                        <separator string="NDT"/>
+                        <group>
+                            <field name="ndt_required"/>
+                            <field name="ndt_method" invisible="not ndt_required"/>
+                            <field name="ndt_result" invisible="not ndt_required"
+                                   widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </page>
+                    <page name="notes" string="Inspector Notes">
+                        <field name="notes" placeholder="Inspector observations, non-conformances, dispositions..."/>
+                    </page>
+                </notebook>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_quality_search" model="ir.ui.view">
+    <field name="name">dg.quality.inspection.search</field>
+    <field name="model">dg.quality.inspection</field>
+    <field name="arch" type="xml">
+        <search string="Quality Inspections">
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="product_id"/>
+            <field name="inspector_id"/>
+            <filter string="Today" name="today"
+                    domain="[('inspection_date','=',context_today().strftime('%Y-%m-%d'))]"/>
+            <filter string="Pass" name="pass" domain="[('overall_result','=','pass')]"/>
+            <filter string="Fail / Scrap" name="fail"
+                    domain="[('overall_result','in',['fail','scrap'])]"/>
+            <filter string="On Hold" name="hold" domain="[('overall_result','=','hold')]"/>
+            <filter string="Cert Pending" name="cert_pending"
+                    domain="[('overall_result','=','pass'),('certificate_issued','=',False)]"/>
+            <filter string="PPAP" name="ppap" domain="[('inspection_type','=','ppap')]"/>
+            <separator/>
+            <filter string="Final Inspection" name="final"
+                    domain="[('inspection_type','=','final')]"/>
+            <filter string="Incoming" name="incoming"
+                    domain="[('inspection_type','=','incoming')]"/>
+            <group expand="0" string="Group By">
+                <filter string="Result" name="group_result" context="{'group_by':'overall_result'}"/>
+                <filter string="Type" name="group_type" context="{'group_by':'inspection_type'}"/>
+                <filter string="Inspector" name="group_inspector" context="{'group_by':'inspector_id'}"/>
+                <filter string="Date" name="group_date" context="{'group_by':'inspection_date:month'}"/>
+                <filter string="Language" name="group_lang" context="{'group_by':'cert_language'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="action_quality_inspection" model="ir.actions.act_window">
+    <field name="name">Quality Inspections</field>
+    <field name="res_model">dg.quality.inspection</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_today': 0}</field>
+</record>
+
+<record id="action_quality_pending_certs" model="ir.actions.act_window">
+    <field name="name">Pending Certificates</field>
+    <field name="res_model">dg.quality.inspection</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('overall_result','=','pass'),('certificate_issued','=',False)]</field>
+    <field name="context">{'search_default_cert_pending': 1}</field>
+</record>
+
+</odoo>

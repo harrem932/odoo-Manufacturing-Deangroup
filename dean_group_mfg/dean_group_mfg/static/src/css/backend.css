@@ -1,0 +1,26 @@
+/* ════════════════════════════════════════════════
+   DEAN GROUP — ODOO BACKEND CSS
+════════════════════════════════════════════════ */
+
+/* Sidebar app icon colour */
+.o_main_navbar .o_menu_brand {
+    color: #d94f0c !important;
+    font-weight: 700;
+}
+
+/* Kanban status colours for casting enquiries */
+.o_kanban_record .badge.bg-fire {
+    background: #d94f0c !important;
+    color: #fff;
+}
+
+/* Quality inspection result colours */
+.dg_result_pass   { color: #15803d; font-weight: 700; }
+.dg_result_fail   { color: #dc2626; font-weight: 700; }
+.dg_result_hold   { color: #b45309; font-weight: 700; }
+.dg_result_scrap  { color: #7c3aed; font-weight: 700; }
+
+/* China supply quality hold highlight */
+.o_data_row.dg_quality_hold {
+    background: #fff5f5 !important;
+}

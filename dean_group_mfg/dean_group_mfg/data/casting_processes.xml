@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ══════════════════════════════════════════
+     COMPANY
+══════════════════════════════════════════ -->
+<record id="company_dg_uk" model="res.company">
+    <field name="name">Dean Group International Ltd</field>
+    <field name="street">Brinell Drive</field>
+    <field name="street2">Northbank Industrial Park</field>
+    <field name="city">Irlam</field>
+    <field name="zip">M44 5BL</field>
+    <field name="country_id" ref="base.uk"/>
+    <field name="phone">0161 775 1633</field>
+    <field name="email">sales@deangroup-int.co.uk</field>
+    <field name="website">https://www.deangroup-int.co.uk</field>
+    <field name="vat">GB146307478</field>
+    <field name="company_registry">1062820</field>
+    <field name="currency_id" ref="base.GBP"/>
+</record>
+
+<!-- ══════════════════════════════════════════
+     CASTING PROCESSES
+══════════════════════════════════════════ -->
+<record id="process_investment_precision" model="dg.casting.process">
+    <field name="name">Investment Casting – Precision Grade</field>
+    <field name="code">investment</field>
+    <field name="sequence">10</field>
+    <field name="description">Lost-wax precision casting. Complex geometries, tight tolerances, excellent surface finish. Ideal for aerospace, defence, medical.</field>
+    <field name="supply_location">both</field>
+    <field name="lead_time_uk">35</field>
+    <field name="lead_time_china">100</field>
+    <field name="max_tolerance">0.0500</field>
+    <field name="website_url">/investment-casting/</field>
+    <field name="color">1</field>
+</record>
+
+<record id="process_die_casting" model="dg.casting.process">
+    <field name="name">Die Casting – High Pressure</field>
+    <field name="code">die</field>
+    <field name="sequence">20</field>
+    <field name="description">High-pressure die casting for high-volume, cost-effective production. Aluminium, zinc, magnesium alloys.</field>
+    <field name="supply_location">china</field>
+    <field name="lead_time_china">112</field>
+    <field name="min_quantity">5000</field>
+    <field name="website_url">/die-casting/</field>
+    <field name="color">2</field>
+</record>
+
+<record id="process_aluminium_elite" model="dg.casting.process">
+    <field name="name">Aluminium Casting – ELITE Process</field>
+    <field name="code">aluminium</field>
+    <field name="sequence">30</field>
+    <field name="description">UK-based ELITE aluminium gravity casting. ADC12/ADC10 alloys. High integrity, gas-tight structure.</field>
+    <field name="supply_location">uk</field>
+    <field name="lead_time_uk">21</field>
+    <field name="website_url">/aluminium-casting/</field>
+    <field name="color">3</field>
+</record>
+
+<record id="process_forging" model="dg.casting.process">
+    <field name="name">Forging – Staged Tooling</field>
+    <field name="code">forging</field>
+    <field name="sequence">40</field>
+    <field name="description">Staged tooling forging for highest-integrity parts. Stainless, carbon steel, aluminium, titanium.</field>
+    <field name="supply_location">both</field>
+    <field name="lead_time_uk">42</field>
+    <field name="lead_time_china">140</field>
+    <field name="website_url">/forging/</field>
+    <field name="color">4</field>
+</record>
+
+<record id="process_mim" model="dg.casting.process">
+    <field name="name">Metal Injection Moulding (MIM)</field>
+    <field name="code">mim</field>
+    <field name="sequence">50</field>
+    <field name="description">Near-net-shape for small, complex, high-volume metallic components. Excellent dimensional accuracy.</field>
+    <field name="supply_location">china</field>
+    <field name="lead_time_china">126</field>
+    <field name="min_quantity">10000</field>
+    <field name="website_url">/mim/</field>
+    <field name="color">5</field>
+</record>
+
+<record id="process_3d_printing" model="dg.casting.process">
+    <field name="name">3D Printing for Casting</field>
+    <field name="code">printing</field>
+    <field name="sequence">60</field>
+    <field name="description">ThermoJet wax printing for rapid prototypes before committing to tooling. CAD to physical prototype in days.</field>
+    <field name="supply_location">uk</field>
+    <field name="lead_time_uk">5</field>
+    <field name="website_url">/3d-printing-for-casting/</field>
+    <field name="color">6</field>
+</record>
+
+<record id="process_machining" model="dg.casting.process">
+    <field name="name">Machining &amp; Finishing</field>
+    <field name="code">machining</field>
+    <field name="sequence">70</field>
+    <field name="description">CNC machining, heat treatment, painting, plating, anodising, assembly. Complete supply from casting to finished part.</field>
+    <field name="supply_location">both</field>
+    <field name="lead_time_uk">14</field>
+    <field name="website_url">/machining/</field>
+    <field name="color">7</field>
+</record>
+</odoo>

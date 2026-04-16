@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ════════════════════════════════════════
+     CASTING DELIVERY NOTE REPORT
+════════════════════════════════════════ -->
+<template id="report_delivery_note_document">
+    <t t-call="web.external_layout">
+        <t t-set="doc" t-value="doc"/>
+        <div style="font-family:Arial,sans-serif;padding:16px">
+
+            <!-- Header -->
+            <table width="100%" style="border-bottom:3px solid #d94f0c;margin-bottom:16px;padding-bottom:12px">
+                <tr>
+                    <td>
+                        <h1 style="color:#d94f0c;font-size:18px;margin:0">DELIVERY NOTE</h1>
+                        <p style="font-size:10px;color:#555;margin:4px 0">
+                            <strong>Dean Group International Ltd</strong><br/>
+                            Brinell Drive, Northbank Industrial Park, Irlam, Manchester M44 5BL<br/>
+                            Tel: 0161 775 1633 · sales@deangroup-int.co.uk
+                        </p>
+                    </td>
+                    <td style="text-align:right;vertical-align:top">
+                        <div style="background:#d94f0c;color:#fff;padding:8px 14px;border-radius:3px;font-size:13px;font-weight:bold">
+                            <t t-esc="doc.name"/>
+                        </div>
+                        <p style="font-size:9px;color:#777;margin-top:6px">Date: <t t-esc="doc.date_done"/></p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Delivery to -->
+            <table width="100%" style="margin-bottom:14px">
+                <tr>
+                    <td style="width:50%;vertical-align:top">
+                        <p style="font-size:10px;font-weight:bold;margin:0 0 4px">Deliver To:</p>
+                        <p style="font-size:10px;color:#333;margin:0">
+                            <t t-esc="doc.partner_id.name"/><br/>
+                            <t t-esc="doc.partner_id.street or ''"/><br/>
+                            <t t-if="doc.partner_id.street2"><t t-esc="doc.partner_id.street2"/><br/></t>
+                            <t t-esc="doc.partner_id.city or ''"/>
+                            <t t-esc="doc.partner_id.zip or ''"/><br/>
+                            <t t-esc="doc.partner_id.country_id.name if doc.partner_id.country_id else ''"/>
+                        </p>
+                    </td>
+                    <td style="width:50%;vertical-align:top">
+                        <table width="100%" style="border-collapse:collapse;font-size:10px">
+                            <tr style="background:#f5f5f5">
+                                <td style="padding:4px 8px;border:1px solid #ddd;font-weight:bold">Ship Date</td>
+                                <td style="padding:4px 8px;border:1px solid #ddd"><t t-esc="doc.date_done"/></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px 8px;border:1px solid #ddd;font-weight:bold">Origin Ref</td>
+                                <td style="padding:4px 8px;border:1px solid #ddd"><t t-esc="doc.origin or ''"/></td>
+                            </tr>
+                            <tr style="background:#f5f5f5">
+                                <td style="padding:4px 8px;border:1px solid #ddd;font-weight:bold">Carrier</td>
+                                <td style="padding:4px 8px;border:1px solid #ddd"><t t-esc="doc.carrier_id.name if doc.carrier_id else 'DPD / DHL'"/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Lines -->
+            <table width="100%" style="border-collapse:collapse;font-size:10px;margin-bottom:14px">
+                <thead>
+                    <tr style="background:#d94f0c;color:#fff">
+                        <th style="padding:6px 8px;text-align:left">Component / Description</th>
+                        <th style="padding:6px 8px;text-align:left">Lot / Batch</th>
+                        <th style="padding:6px 8px;text-align:center">Qty Shipped</th>
+                        <th style="padding:6px 8px;text-align:center">UOM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.move_line_ids" t-as="line">
+                        <tr t-att-style="'background:#f9f9f9' if line_odd else ''">
+                            <td style="padding:5px 8px;border:1px solid #ddd">
+                                <t t-esc="line.product_id.name"/>
+                                <t t-if="line.product_id.default_code">
+                                    <br/><small style="color:#777">Ref: <t t-esc="line.product_id.default_code"/></small>
+                                </t>
+                            </td>
+                            <td style="padding:5px 8px;border:1px solid #ddd"><t t-esc="line.lot_id.name if line.lot_id else ''"/></td>
+                            <td style="padding:5px 8px;border:1px solid #ddd;text-align:center;font-weight:bold"><t t-esc="line.qty_done"/></td>
+                            <td style="padding:5px 8px;border:1px solid #ddd;text-align:center"><t t-esc="line.product_uom_id.name"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Notes -->
+            <t t-if="doc.note">
+                <div style="background:#f5f5f5;border:1px solid #ddd;padding:8px;font-size:9px;margin-bottom:14px">
+                    <strong>Notes:</strong> <t t-esc="doc.note"/>
+                </div>
+            </t>
+
+            <!-- Signature -->
+            <table width="100%" style="margin-top:24px">
+                <tr>
+                    <td style="width:45%;border-top:1px solid #333;padding-top:6px;text-align:center;font-size:9px">
+                        <br/>Received by (print name)<br/>&amp; Signature
+                    </td>
+                    <td style="width:10%"></td>
+                    <td style="width:45%;border-top:1px solid #333;padding-top:6px;text-align:center;font-size:9px">
+                        <br/>Date Received
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Footer -->
+            <div style="margin-top:20px;border-top:1px solid #ddd;padding-top:8px;font-size:8px;color:#888;text-align:center">
+                Dean Group International Ltd · VAT GB146307478 · ISO 9001:2015 Certified
+                · This delivery note should be retained for audit purposes.
+            </div>
+        </div>
+    </t>
+</template>
+
+<record id="action_report_delivery_note" model="ir.actions.report">
+    <field name="name">Casting Delivery Note</field>
+    <field name="model">stock.picking</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">dean_group_mfg.report_delivery_note_document</field>
+    <field name="report_file">dean_group_mfg.report_delivery_note_document</field>
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_type">report</field>
+</record>
+
+</odoo>
