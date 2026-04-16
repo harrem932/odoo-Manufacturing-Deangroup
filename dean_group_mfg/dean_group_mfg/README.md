@@ -212,9 +212,12 @@ To print a multilingual CoC:
 
 ## Support
 
-Built by **Zenvora** | www.zenvora.com | contact@zenvora.com
+Built by **Zenvora own by Harrem Rasheed** | www.zenvora.com | harremrasheed@gmail.com
 
 For Odoo implementation, support retainer or further development:
 - Email: contact@zenvora.com
 - Server: Hetzner CX41 (recommended) — £16/month
 - Odoo Community: Free (self-hosted)
+
+M. Harrem Rasheed
+
